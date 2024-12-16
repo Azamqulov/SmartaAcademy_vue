@@ -33,7 +33,7 @@
           </v-card-title>
           <v-card-actions>
             <v-btn color="primary" @click="openEditModal"> Tahrirlash</v-btn>
-            <v-btn color="secondary" @click="openLoginEditModal">Login va Parolni Tahrirlash</v-btn>
+            <v-btn color="secondary" @click="openLoginEditModal">Parolni Tahrirlash</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
