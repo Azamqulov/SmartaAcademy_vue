@@ -68,8 +68,9 @@
       <!-- Profile Section -->
       <v-spacer></v-spacer>
       <v-avatar color="primary" class=" rounded-full mr-4">
-        <!-- <v-img :src="profileImage"></v-img> -->
-        <v-btn text>{{ profileInitial }}</v-btn>
+         <router-link to="/dashboard">
+          <v-btn text>{{ profileInitial }}</v-btn>
+        </router-link>
       </v-avatar>
     </v-app-bar>
 
