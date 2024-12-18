@@ -1,5 +1,8 @@
 <template>
-  <v-app class="main-blogbg-gray-900" style="height: 100vh; scrollbar-width: 5px;">
+  <v-app
+    class="main-blogbg-gray-900"
+    style="height: 100vh; scrollbar-width: 5px"
+  >
     <!-- Sidebar -->
     <v-navigation-drawer app v-model="sidebarVisible">
       <v-list>
@@ -32,20 +35,28 @@
           </v-list-item-icon>
         </v-list-item>
       </v-list>
-      <v-btn 
-        @click="logout" 
-        class="w-full bg-red-700 mx-3" 
-        style="position: absolute; bottom: 10px; background: red; width: 90%;"
+      <v-btn
+        @click="logout"
+        class="w-full bg-red-700 mx-3"
+        style="position: absolute; bottom: 10px; background: red; width: 90%"
       >
         <v-icon>mdi-logout</v-icon>
       </v-btn>
-      <v-btn 
-        icon 
-        @click="toggleSidebar" 
+      <v-btn
+        icon
+        @click="toggleSidebar"
         class="h-8 w-5 rounded"
-        style="position: absolute; top: 8.5%; right: -36px; z-index: 10; width: 35px;"
+        style="
+          position: absolute;
+          top: 8.5%;
+          right: -36px;
+          z-index: 10;
+          width: 35px;
+        "
       >
-        <v-icon>{{ sidebarVisible ? 'mdi-chevron-left' : 'mdi-chevron-right' }}</v-icon>
+        <v-icon>{{
+          sidebarVisible ? "mdi-chevron-left" : "mdi-chevron-right"
+        }}</v-icon>
       </v-btn>
     </v-navigation-drawer>
 
@@ -61,14 +72,16 @@
 
       <!-- Profile Section -->
       <v-spacer></v-spacer>
-      <v-avatar color="primary" class=" rounded-full mr-4">
+      <v-avatar color="primary" class="rounded-full mr-4">
         <!-- <v-img :src="profileImage"></v-img> -->
-        <v-btn text>{{ profileInitial }}</v-btn>
+        <router-link to="/admin-dashboard/admin">
+          <v-btn text>{{ profileInitial }}</v-btn>
+        </router-link>
       </v-avatar>
     </v-app-bar>
 
     <!-- Main Content -->
-    <v-main class="overflow-y-scroll" style="height: 100vh;">
+    <v-main class="overflow-y-scroll" style="height: 100vh">
       <router-view />
       <!-- Dinamik qism shu yerda o'zgaradi -->
     </v-main>
@@ -82,17 +95,32 @@ export default {
       sidebarVisible: true, // Sidebar boshlang‘ich holati
       menuItems: [
         { title: "Home", icon: "mdi-home", link: "/admin-dashboard/home" },
-        { title: "Student", icon: "mdi-account-circle", link: "/admin-dashboard/student" },
-        { title: "Payment", icon: "mdi-credit-card", link: "/admin-dashboard/payment" },
-        { title: "Teacher", icon: "mdi-account", link: "/admin-dashboard/teacher" },
+        {
+          title: "Student",
+          icon: "mdi-account-circle",
+          link: "/admin-dashboard/student",
+        },
+        {
+          title: "Payment",
+          icon: "mdi-credit-card",
+          link: "/admin-dashboard/payment",
+        },
+        {
+          title: "Teacher",
+          icon: "mdi-account",
+          link: "/admin-dashboard/teacher",
+        },
         // { title: "Dasboard", icon: "mdi-view-dashboard", link: "/admin-dashboard/dashboard" },
-        { title: "Dasboard", icon: "mdi-view-dashboard", link: "/admin-dashboard/admin" },
+        {
+          title: "Dasboard",
+          icon: "mdi-view-dashboard",
+          link: "/admin-dashboard/admin",
+        },
       ],
       currentUser: localStorage.getItem("teacherName"), // Get Teacher Name from localStorage
       profileImage: "../assets/images/profile-placeholder.jpg", // Profile image path
-      currentTheme: localStorage.getItem("theme") || "light", // Default 
+      currentTheme: localStorage.getItem("theme") || "light", // Default
     };
-    
   },
   computed: {
     // First letter of the user's name
