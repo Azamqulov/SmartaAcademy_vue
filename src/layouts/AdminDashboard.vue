@@ -61,6 +61,7 @@
     </v-navigation-drawer>
 
     <!-- Navbar -->
+
     <v-app-bar app>
       <v-btn @click="toggleTheme">
         <v-icon>{{
@@ -73,7 +74,6 @@
       <!-- Profile Section -->
       <v-spacer></v-spacer>
       <v-avatar color="primary" class="rounded-full mr-4">
-        <!-- <v-img :src="profileImage"></v-img> -->
         <router-link to="/admin-dashboard/admin">
           <v-btn text>{{ profileInitial }}</v-btn>
         </router-link>
