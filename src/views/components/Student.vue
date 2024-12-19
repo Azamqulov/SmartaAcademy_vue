@@ -25,6 +25,7 @@
         :items="filteredStudents"
         :items-per-page="10"
         class="elevation-1"
+        text-uppercase
       >
         <template v-slot:item.index="{ index }">
           <!-- Display sequence number based on index and pagination -->
