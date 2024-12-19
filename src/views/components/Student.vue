@@ -24,8 +24,8 @@
         :headers="headers"
         :items="filteredStudents"
         :items-per-page="10"
-        class="elevation-1"
-        text-uppercase
+        class="elevation-1 text-capitalize"
+        
       >
         <template v-slot:item.index="{ index }">
           <!-- Display sequence number based on index and pagination -->
@@ -186,7 +186,7 @@ export default {
       currentUser: null, // Current logged-in teacher username
       headers: [
         { text: "No", value: "index", sortable: false },
-        { text: "Surname", value: "surname" },
+        { text: "Surname", value: "surname",class:"text-uppercase" },
         { text: "Name", value: "name" },
         { text: "Teacher", value: "teacher.name" },
         { text: "Subject", value: "subject" },

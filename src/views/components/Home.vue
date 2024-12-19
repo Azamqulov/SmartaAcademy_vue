@@ -33,7 +33,7 @@
       :headers="headers"
       :items="filteredStudents"
       :items-per-page="10"
-      class="elevation-1 uppercase"
+      class="elevation-1 text-capitalize"
     >
       <template v-slot:top>
         <v-toolbar flat>
