@@ -1,16 +1,19 @@
 <template>
-<v-card class="pa-5">
-  <v-card-title class="text-h5 text-center">O'qituvchilar Statistikasi</v-card-title>
-  <div class="teacher-list d-flex  justify-space-around ">
-    <div v-for="teacher in teachers" :key="teacher.id" class="teacher-item mx-5 ">
-      <h3 class="px-5 py-3">{{ teacher.name }}</h3>
-      <v-btn color="info" @click="viewDetails(teacher)">
-        Batafsil
-      </v-btn>
+  <v-card class="pa-5">
+    <v-card-title class="text-h5 text-center"
+      >O'qituvchilar Statistikasi</v-card-title
+    >
+    <div class="teacher-list justify-space-around">
+      <div
+        v-for="teacher in teachers"
+        :key="teacher.id"
+        class="teacher-item mx-5"
+      >
+        <h3 class="px-5 py-3">{{ teacher.name }}</h3>
+        <v-btn color="info" @click="viewDetails(teacher)"> Batafsil </v-btn>
+      </div>
     </div>
-  </div>
-</v-card>
-
+  </v-card>
 
   <v-dialog v-model="showDetails" max-width="600px">
     <v-card>
@@ -96,3 +99,9 @@ export default {
   },
 };
 </script>
+<style>
+.teacher-list {
+  display: flex;
+  flex-wrap: wrap !important;
+}
+</style>
