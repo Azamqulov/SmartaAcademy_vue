@@ -416,7 +416,7 @@ export default {
           subject: this.editedStudent.subject,
           teacher: this.editedStudent.teacher,
           teacher: { name: this.editedStudent.teacher },
-          // payment: this.editedStudent.payment,
+          payment: this.editedStudent.payment,
           date: this.editedStudent.date,
         });
 
