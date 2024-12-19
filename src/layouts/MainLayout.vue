@@ -69,7 +69,7 @@
       <v-spacer></v-spacer>
       <v-avatar color="primary" class=" rounded-full mr-4">
          <router-link to="/main/dashboard">
-          <v-btn text>{{ profileInitial }}</v-btn>
+          <v-btn text color="surface">{{ profileInitial }}</v-btn>
         </router-link>
       </v-avatar>
     </v-app-bar>

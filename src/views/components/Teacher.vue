@@ -2,11 +2,13 @@
   <v-container>
     <v-card class="pa-5">
       <v-card
-        class="flex d-flex justify-between items-center"
+        class="v-card-title d-flex justify-between items-center"
         style="justify-content: space-between; align-items: center"
       >
-        <v-card-title class="text-h5">O'qtuvchi qo'shish </v-card-title>
-        <v-btn color="green" class="mr-4" @click="openAddTeacherModal">
+        <v-card-title class="text-h5"
+          >O'qtuvchi qo'shish
+        </v-card-title>
+        <v-btn color="green" class=" btn-title mr-4" @click="openAddTeacherModal">
           Add Teacher
         </v-btn>
       </v-card>
@@ -35,7 +37,7 @@
                 <v-btn
                   small
                   color="warning"
-                  class="mr-2 my-3"
+                  class="ml-2 my-3"
                   @click="editTeacher(teacher)"
                 >
                   <v-icon>mdi-pencil</v-icon>
@@ -58,10 +60,10 @@
     <!-- Teacher Modal -->
     <v-dialog v-model="showModal" max-width="500px">
       <v-card>
-        <v-card-title
-          >{ { isEdit ? "O'qtuvchi taxriirlash" : "O'qtuvchi qo'shish" }
-          }</v-card-title
-        >
+        <v-card-title>{{
+          isEdit ? "O'qtuvchi taxriirlash" : "O'qtuvchi qo'shish"
+        }}</v-card-title>
+
         <v-card-text>
           <v-form ref="form" v-model="formValid" lazy-validation>
             <v-text-field
@@ -239,4 +241,16 @@ export default {
 
 <style>
 /* Toastify uchun qo'shimcha styling kerak bo'lsa, shu yerga yozing */
+.v-card-title {
+  flex-wrap: wrap;
+}
+@media (max-width: 576px) {
+  .v-card-title {
+    flex-wrap: wrap;
+    margin: 0 auto;
+  }
+  .btn-title {
+    margin: 0 30%;
+  }
+}
 </style>

@@ -75,15 +75,15 @@
       <v-spacer></v-spacer>
       <v-avatar color="primary" class="rounded-full mr-4">
         <router-link to="/admin-dashboard/admin">
-          <v-btn text>{{ profileInitial }}</v-btn>
+          <v-btn text color="surface">{{ profileInitial }}</v-btn>
         </router-link>
       </v-avatar>
     </v-app-bar>
 
     <!-- Main Content -->
+    <!-- Main Content -->
     <v-main class="overflow-y-scroll" style="height: 100vh">
       <router-view />
-      <!-- Dinamik qism shu yerda o'zgaradi -->
     </v-main>
   </v-app>
 </template>
@@ -160,8 +160,9 @@ export default {
 </script>
 
 <style scoped type="scss">
-.main-blogbg-gray-900 {
-  background-color: #1e293b; /* Qora fon */
+.dark-mode {
+  background-color: #203b37; /* Dark background */
+  color: #ffffff; /* Light text color */
 }
 
 ::-webkit-scrollbar {
