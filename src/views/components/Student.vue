@@ -1,168 +1,168 @@
 <template>
-    <v-container>
-      <v-row class="d-flex justify-space-between justify-between mb-4 mt-8" style="">
-        <h1 class="px-3 ">O'quvchilar ma'lumotlari</h1>
+  <v-container>
+    <v-row
+      class="d-flex justify-space-between justify-between mb-4 mt-8"
+      style=""
+    >
+      <h1 class="px-3">O'quvchilar ma'lumotlari</h1>
 
-        <!-- Search bar and action buttons -->
-        <v-col class="text-end">
-          <v-btn color="green" @click="openAddModal" class=""
-            >o'quvchi qo'shish</v-btn
-          >
-          <v-btn color="yellow" class="ml-4" @click="exportToExcel"> Excel yuklash</v-btn>
-        </v-col>
-      </v-row>
+      <!-- Search bar and action buttons -->
+      <v-col class="text-end">
+        <v-btn color="green" @click="openAddModal" class=""
+          >o'quvchi qo'shish</v-btn
+        >
+        <v-btn color="yellow" class="ml-4" @click="exportToExcel">
+          Excel yuklash</v-btn
+        >
+      </v-col>
+    </v-row>
 
-      <v-text-field
-        v-model="search"
-        label="Search by Name"
-        class="mb-4"
-        clearable
-        outlined
-      />
+    <v-text-field
+      v-model="search"
+      label="Search by Name"
+      class="mb-4"
+      clearable
+      outlined
+    />
 
-      <v-data-table
-        :headers="headers"
-        :items="filteredStudents"
-        :items-per-page="10"
-        class="elevation-1 text-capitalize"
-        
-      >
-        <template v-slot:item.index="{ index }">
-          <!-- Display sequence number based on index and pagination -->
-          {{ index + 1 }}
-        </template>
-        <template v-slot:item.teacher="{ item }">
-          <!-- Display teacher name -->
-          {{ item.teacher.name }}
-        </template>
-        <template v-slot:item.actions="{ item }">
-          <!-- Edit Button -->
-          <v-btn class="mr-2" color="blue" @click="editStudent(item)">
-            <v-icon>mdi-pencil</v-icon>
-          </v-btn>
-          <!-- Delete Button -->
-          <v-btn color="red" @click="deleteStudent(item)">
-            <v-icon>mdi-delete</v-icon>
-          </v-btn>
-        </template>
-      </v-data-table>
+    <v-data-table
+      :headers="headers"
+      :items="filteredStudents"
+      :items-per-page="10"
+      class="elevation-1 text-capitalize"
+    >
+      <template v-slot:item.index="{ index }">
+        <!-- Display sequence number based on index and pagination -->
+        {{ index + 1 }}
+      </template>
+      <template v-slot:item.teacher="{ item }">
+        <!-- Display teacher name -->
+        {{ item.teacher.name }}
+      </template>
+      <template v-slot:item.actions="{ item }">
+        <!-- Edit Button -->
+        <v-btn class="mr-2" color="blue" @click="editStudent(item)">
+          <v-icon>mdi-pencil</v-icon>
+        </v-btn>
+        <!-- Delete Button -->
+        <v-btn color="red" @click="deleteStudent(item)">
+          <v-icon>mdi-delete</v-icon>
+        </v-btn>
+      </template>
+    </v-data-table>
 
-      <!-- Edit Student Modal -->
-      <v-dialog v-model="editModal" max-width="500px">
-        <v-card>
-          <v-card-title class="headline">O'quvchini taxrirlash</v-card-title>
-          <v-card-text>
-            <v-form>
-              <v-text-field
-                v-model="editedStudent.name"
-                label="Ism"
-                required
-              />
-              <v-text-field
-                v-model="editedStudent.surname"
-                label="Familya"
-                required
-              />
-              <v-text-field
-                v-model="editedStudent.phone"
-                label="Telefon raqam"
-                type="number"
-                required
-              />
-              <v-select
-                v-model="editedStudent.subject"
-                :items="subjects"
-                item-text="name"
-                item-value="name"
-                label="Fan"
-                required
-              />
-              <v-select
-                v-model="editedStudent.teacher"
-                :items="teachers"
-                item-text="name"
-                item-value="id"
-                label="O'qtuvchi"
-              />
-              <v-text-field
-                v-model="editedStudent.payment"
-                label="To'lov summasi"
-                type="number"
-                required
-              />
-              <v-text-field
-                v-model="editedStudent.date"
-                label="Date"
-                type="date"
-                required
-              />
-            </v-form>
-          </v-card-text>
-          <v-card-actions>
-            <v-btn color="blue" @click="updateStudent">saqlash</v-btn>
-            <v-btn color="red" @click="editModal = false">bekor qilish</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+    <!-- Edit Student Modal -->
+    <v-dialog v-model="editModal" max-width="500px">
+      <v-card>
+        <v-card-title class="headline">O'quvchini taxrirlash</v-card-title>
+        <v-card-text>
+          <v-form>
+            <v-text-field v-model="editedStudent.name" label="Ism" required />
+            <v-text-field
+              v-model="editedStudent.surname"
+              label="Familya"
+              required
+            />
+            <v-text-field
+              v-model="editedStudent.phone"
+              label="Telefon raqam"
+              type="number"
+              required
+            />
+            <v-select
+              v-model="editedStudent.subject"
+              :items="subjects"
+              item-text="name"
+              item-value="name"
+              label="Fan"
+              required
+            />
+            <v-select
+              v-model="editedStudent.teacher"
+              :items="teachers"
+              item-text="name"
+              item-value="id"
+              label="O'qtuvchi"
+            />
+            <v-text-field
+              v-model="editedStudent.payment"
+              label="To'lov summasi"
+              type="number"
+              required
+            />
+            <v-text-field
+              v-model="editedStudent.date"
+              label="Date"
+              type="date"
+              required
+            />
+          </v-form>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn color="blue" @click="updateStudent">saqlash</v-btn>
+          <v-btn color="red" @click="editModal = false">bekor qilish</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 
-      <!-- Add Student Modal -->
-      <v-dialog v-model="addModal" max-width="500px">
-        <v-card>
-          <v-card-title class="headline">O'quvchi qo'shish </v-card-title>
-          <v-card-text>
-            <v-form>
-              <v-text-field v-model="newStudent.name" label="Ism" required />
-              <v-text-field
-                v-model="newStudent.surname"
-                label="Familya"
-                min-lenth="3"
-                required
-              />
-              <v-text-field
-                v-model="newStudent.phone"
-                label="Telefon raqam"
-                type="number"
-                required
-                maxlength="10"
-              />
-              <v-select
-                v-model="newStudent.subject"
-                :items="subjects"
-                item-text="name"
-                item-value="name"
-                label="Fan"
-                required
-              />
-              <v-select
-                v-model="newStudent.teacher"
-                :items="teachers"
-                item-text="name"
-                item-value="name"
-                label="O'qtuvchi"
-                required
-                outlined
-              />
-              <v-text-field
-                v-model="newStudent.payment"
-                label="To'lov summasi"
-                type="number"
-                required
-              />
-              <v-text-field
-                v-model="newStudent.date"
-                label="Kelgan sanasi"
-                type="date"
-                required
-              />
-            </v-form>
-          </v-card-text>
-          <v-card-actions>
-            <v-btn color="blue" @click="addStudent">Qo'shish</v-btn>
-            <v-btn color="red" @click="addModal = false">Bekor qilish</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-container>
+    <!-- Add Student Modal -->
+    <v-dialog v-model="addModal" max-width="500px">
+      <v-card>
+        <v-card-title class="headline">O'quvchi qo'shish </v-card-title>
+        <v-card-text>
+          <v-form>
+            <v-text-field v-model="newStudent.name" label="Ism" required />
+            <v-text-field
+              v-model="newStudent.surname"
+              label="Familya"
+              min-lenth="3"
+              required
+            />
+            <v-text-field
+              v-model="newStudent.phone"
+              label="Telefon raqam"
+              type="number"
+              required
+              maxlength="10"
+            />
+            <v-select
+              v-model="newStudent.subject"
+              :items="subjects"
+              item-text="name"
+              item-value="name"
+              label="Fan"
+              required
+            />
+            <v-select
+              v-model="newStudent.teacher"
+              :items="teachers"
+              item-text="name"
+              item-value="name"
+              label="O'qtuvchi"
+              required
+              outlined
+            />
+            <v-text-field
+              v-model="newStudent.payment"
+              label="To'lov summasi"
+              type="number"
+              required
+            />
+            <v-text-field
+              v-model="newStudent.date"
+              label="Kelgan sanasi"
+              type="date"
+              required
+            />
+          </v-form>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn color="blue" @click="addStudent">Qo'shish</v-btn>
+          <v-btn color="red" @click="addModal = false">Bekor qilish</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </v-container>
 </template>
 
 <script>
@@ -186,7 +186,7 @@ export default {
       currentUser: null, // Current logged-in teacher username
       headers: [
         { text: "No", value: "index", sortable: false },
-        { text: "Surname", value: "surname",class:"text-uppercase" },
+        { text: "Surname", value: "surname", class: "text-uppercase" },
         { text: "Name", value: "name" },
         { text: "Teacher", value: "teacher.name" },
         { text: "Subject", value: "subject" },
@@ -245,8 +245,7 @@ export default {
         return this.students
           .filter((student) =>
             student.teacher && student.teacher.name
-              ? student.teacher.name ===
-                this.currentUser
+              ? student.teacher.name === this.currentUser
               : false
           )
           .filter(
