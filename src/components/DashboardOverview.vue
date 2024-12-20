@@ -14,7 +14,7 @@
       </div>
     </div>
   </v-card>
-
+  <!-- modal open -->
   <v-dialog v-model="showDetails" max-width="600px">
     <v-card>
       <v-card-title>O'qituvchi Batafsil</v-card-title>
