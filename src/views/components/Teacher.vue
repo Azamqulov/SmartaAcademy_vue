@@ -5,10 +5,12 @@
         class="v-card-title d-flex justify-between items-center"
         style="justify-content: space-between; align-items: center"
       >
-        <v-card-title class="text-h5"
-          >O'qtuvchi qo'shish
-        </v-card-title>
-        <v-btn color="green" class=" btn-title mr-4" @click="openAddTeacherModal">
+        <v-card-title class="text-h5">O'qtuvchi qo'shish </v-card-title>
+        <v-btn
+          color="green"
+          class="btn-title mr-4"
+          @click="openAddTeacherModal"
+        >
           Add Teacher
         </v-btn>
       </v-card>
