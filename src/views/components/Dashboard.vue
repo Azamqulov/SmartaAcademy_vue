@@ -5,7 +5,7 @@
       <v-col cols="12" md="10" lg="7">
         <v-card class="pa-4 m-auto" outlined>
           <v-card-title>
-            <v-avatar size="100" style="margin: 20px  47%" justify="center">
+            <v-avatar size="100" class="avatar-main">
               <template v-if="teacher.photoURL">
                 <img
                   width="100% "
@@ -17,7 +17,12 @@
               </template>
               <template v-else>
                 <v-avatar
-                  style="height: 150px; width: 150px;  font-size: 28px; text-align: center;"
+                  style="
+                    height: 150px;
+                    width: 150px;
+                    font-size: 28px;
+                    text-align: center;
+                  "
                   color="primary"
                   class="white--text text--center m--auto text-3xl"
                 >
@@ -33,7 +38,9 @@
           </v-card-title>
           <v-card-actions>
             <v-btn color="primary" @click="openEditModal"> Tahrirlash</v-btn>
-            <v-btn color="secondary" @click="openLoginEditModal">Parolni Tahrirlash</v-btn>
+            <v-btn color="secondary" @click="openLoginEditModal"
+              >Parolni Tahrirlash</v-btn
+            >
           </v-card-actions>
         </v-card>
       </v-col>
@@ -63,8 +70,10 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn text @click="closeEditModal">Bekor qilish</v-btn>
-          <v-btn color="primary" @click="saveTeacher">Saqlash</v-btn>
+          <v-card class="btn">
+            <v-btn text @click="closeEditModal">Bekor qilish</v-btn>
+            <v-btn color="primary" @click="saveTeacher">Saqlash</v-btn>
+          </v-card>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -90,7 +99,7 @@
             @click:append="togglePasswordVisibility"
           ></v-text-field>
         </v-card-text>
-        <v-card-actions>
+        <v-card-actions class="btn-action">
           <v-spacer></v-spacer>
           <v-btn text @click="closeLoginEditModal">Bekor qilish</v-btn>
           <v-btn color="primary" @click="saveLoginDetails">Saqlash</v-btn>
@@ -180,7 +189,7 @@ export default {
       // Fetch subjects from Firestore
       await this.fetchSubjects();
     },
-    
+
     async fetchSubjects() {
       try {
         const querySnapshot = await getDocs(collection(db, "subjects"));
@@ -190,7 +199,7 @@ export default {
         console.error("Error loading teachers:", error);
       }
     },
-   
+
     openEditModal() {
       this.editModal = true;
     },
@@ -269,4 +278,15 @@ export default {
 
 <style scoped>
 /* Custom Styles */
+.avatar-main {
+  margin: 0 auto;
+  display: flex;
+}
+@media (max-width: 390px) {
+  .btn {
+    flex-direction: column;
+    margin-top: 50px !important;
+    flex-wrap: wrap !important;
+  }
+}
 </style>
