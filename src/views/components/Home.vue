@@ -16,14 +16,18 @@
       <v-col cols="6" sm="6" md="6">
         <v-card class="elevation-1">
           <v-card-title>O'quvchilar soni</v-card-title>
-          <v-card-subtitle style="font-size: 20px;">{{ totalStudents }} ta</v-card-subtitle>
+          <v-card-subtitle style="font-size: 20px"
+            >{{ totalStudents }} ta</v-card-subtitle
+          >
         </v-card>
       </v-col>
 
       <v-col cols="6" sm="6" md="6">
         <v-card class="elevation-1 text-center">
           <v-card-title>Jammi to'lovlar</v-card-title>
-          <v-card-subtitle class="text-4xl" style="font-size: 20px;">{{ totalPayments }} so'm</v-card-subtitle>
+          <v-card-subtitle class="text-4xl" style="font-size: 20px"
+            >{{ totalPayments }} so'm</v-card-subtitle
+          >
         </v-card>
       </v-col>
     </v-row>
@@ -52,7 +56,15 @@
 
 <script>
 import { db } from "@/firebaseConfig";
-import { collection, getDocs, query, where, doc, setDoc  ,getDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  doc,
+  setDoc,
+  getDoc,
+} from "firebase/firestore";
 
 export default {
   data() {
@@ -75,20 +87,23 @@ export default {
     // Filter students based on search input and role
     filteredStudents() {
       if (this.role === "admin") {
-        return this.students.filter((student) =>
-          student.name.toLowerCase().includes(this.search.toLowerCase()) ||
-          student.surname.toLowerCase().includes(this.search.toLowerCase())
+        return this.students.filter(
+          (student) =>
+            student.name.toLowerCase().includes(this.search.toLowerCase()) ||
+            student.surname.toLowerCase().includes(this.search.toLowerCase())
         );
       } else {
         return this.students
           .filter((student) =>
             student.teacher && student.teacher.name
-              ? student.teacher.name.toLowerCase() === this.currentUser.toLowerCase()
+              ? student.teacher.name.toLowerCase() ===
+                this.currentUser.toLowerCase()
               : false
           )
-          .filter((student) =>
-            student.name.toLowerCase().includes(this.search.toLowerCase()) ||
-            student.surname.toLowerCase().includes(this.search.toLowerCase())
+          .filter(
+            (student) =>
+              student.name.toLowerCase().includes(this.search.toLowerCase()) ||
+              student.surname.toLowerCase().includes(this.search.toLowerCase())
           );
       }
     },
@@ -103,7 +118,7 @@ export default {
       return this.filteredStudents.reduce((total, student) => {
         let paymentValue = student.payment;
         if (typeof paymentValue !== "string") {
-          paymentValue = JSON.stringify(paymentValue);  // Convert object to string if necessary
+          paymentValue = JSON.stringify(paymentValue); // Convert object to string if necessary
         }
         const parsedPayment = parseFloat(paymentValue.replace(/[^\d.-]/g, ""));
         return !isNaN(parsedPayment) ? total + parsedPayment : total;
