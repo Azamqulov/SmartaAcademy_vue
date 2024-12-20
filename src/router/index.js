@@ -18,7 +18,7 @@ import AdminDashboard from "@/layouts/AdminDashboard.vue";
 //   { path: '/admin-dashboard', component: AdminDashboard },
 //   { path: '/teacher-dashboard', component: TeacherDashboard },
 // ];
-import page404 from "@/pages/404.vue"
+import page404 from "@/views/404.vue"
 const routes = [
   {
     path: "/",

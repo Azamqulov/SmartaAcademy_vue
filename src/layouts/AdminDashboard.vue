@@ -1,6 +1,6 @@
 <template>
   <v-app
-    class="main-blogbg-gray-900"
+    class="main-blog"
     style="height: 100vh; scrollbar-width: 5px"
   >
     <!-- Sidebar -->
@@ -82,7 +82,7 @@
 
     <!-- Main Content -->
     <!-- Main Content -->
-    <v-main class="overflow-y-scroll" style="height: 100vh">
+    <v-main class="overflow-y-scroll" style="height: 100vh" color="background">
       <router-view />
     </v-main>
   </v-app>
@@ -127,9 +127,7 @@ export default {
     profileInitial() {
       return this.currentUser.charAt(0).toUpperCase();
     },
-    themeClass() {
-      return this.currentTheme === "dark" ? "dark-mode" : "light-mode"; // Dynamic theme class
-    },
+  
   },
   methods: {
     toggleTheme() {
@@ -159,10 +157,20 @@ export default {
 };
 </script>
 
-<style scoped type="scss">
+<style scoped>
+
 .dark-mode {
   background-color: #203b37; /* Dark background */
   color: #ffffff; /* Light text color */
+}
+
+.light-mode {
+  background-color: #ffffff; /* Light background */
+  color: #000000; /* Dark text color */
+}
+
+.v-btn {
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 ::-webkit-scrollbar {
@@ -174,7 +182,9 @@ export default {
   background: #111827;
 }
 
-.v-btn {
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+.v-avatar img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
 }
 </style>
