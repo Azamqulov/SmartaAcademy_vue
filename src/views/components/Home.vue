@@ -176,7 +176,7 @@ export default {
       }
 
       try {
-        const teacherDocRef = doc(db, "teachers", this.currentUser); // Use currentUser as document ID
+        const teacherDocRef = doc(db, "users", this.currentUser); // Use currentUser as document ID
         const teacherDoc = await getDoc(teacherDocRef);
 
         const teacherData = {

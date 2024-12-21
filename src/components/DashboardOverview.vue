@@ -66,7 +66,7 @@ export default {
   methods: {
     async fetchTeachers() {
       try {
-        const querySnapshot = await getDocs(collection(db, "teachers"));
+        const querySnapshot = await getDocs(collection(db, "users"));
         this.teachers = await Promise.all(
           querySnapshot.docs.map(async (doc) => {
             const teacherData = doc.data();
