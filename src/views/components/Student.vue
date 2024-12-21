@@ -281,7 +281,6 @@ export default {
           id: doc.id,
           ...doc.data(),
         }));
-        console.log("Students loaded:", this.students);
       } catch (error) {
         console.error("Error loading students:", error);
       }
@@ -292,7 +291,6 @@ export default {
       try {
         const querySnapshot = await getDocs(collection(db, "subjects"));
         this.subjects = querySnapshot.docs.map((doc) => doc.data().name); // Saqlash faqat `name` stringini
-        console.log("Teachers loaded:", this.subjects);
       } catch (error) {
         console.error("Error loading teachers:", error);
       }
@@ -313,7 +311,6 @@ export default {
       try {
         const querySnapshot = await getDocs(collection(db, "teachers"));
         this.teachers = querySnapshot.docs.map((doc) => doc.data().name); // Saqlash faqat `name` stringini
-        console.log("Teachers loaded:", this.teachers);
       } catch (error) {
         console.error("Error loading teachers:", error);
       }

@@ -153,8 +153,8 @@ export default {
       this.currentTheme = savedTheme;
       this.$vuetify.theme.dark = savedTheme === "dark"; // Vuetify-ning theme.dark holatini yangilash
     }
-  },
-};
+  }
+}
 </script>
 
 <style scoped>
