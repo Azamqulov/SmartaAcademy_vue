@@ -1,8 +1,8 @@
 <template>
-  <v-container >
-    <v-card class="pa-5 mx-auto" max-width="400">
+  <v-container>
+    <v-card class="pa-5 mx-auto" max-width="500">
       <v-img
-        class="w-4 h-10"
+        class="w-5 h-10"
         height="150px"
         src="../assets/images/biglogo.png"
         alt="bu yerda logo bor "
@@ -10,10 +10,16 @@
       <v-card-title class="text-h5 text-center"
         >Smart Academy Login</v-card-title
       >
-      <v-form ref="form" v-model="valid"  @submit.prevent="login" lazy-validation >
+      <v-form
+        ref="form"
+        v-model="valid"
+        @submit.prevent="login"
+        lazy-validation
+      >
         <v-text-field
           v-model="username"
           label="Username"
+          class="w-full"
           required
         ></v-text-field>
         <v-text-field
@@ -109,7 +115,7 @@ export default {
 }
 
 .v-card {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.526);
   border-radius: 10px;
 }
 
