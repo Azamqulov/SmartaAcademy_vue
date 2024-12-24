@@ -8,7 +8,7 @@
         alt="bu yerda logo bor "
       ></v-img>
       <v-card-title class="text-h5 text-center"
-        >Smart Academy Login</v-card-title
+        >Smart-Academy Login</v-card-title
       >
       <v-form
         ref="form"
