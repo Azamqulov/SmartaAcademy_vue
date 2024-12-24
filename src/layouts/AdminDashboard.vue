@@ -1,5 +1,5 @@
 <template>
-  <v-app class="main-blog" style="height: 100vh; scrollbar-width: 5px">
+  <v-app :class="themeClass" style="height: 100vh; scrollbar-width: 5px">
     <!-- Sidebar -->
     <v-navigation-drawer app v-model="sidebarVisible">
       <v-list>
