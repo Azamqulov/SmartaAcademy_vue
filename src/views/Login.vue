@@ -115,7 +115,7 @@ export default {
 }
 
 .v-card {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.526);
+  box-shadow: 0 5px 10px rgba(74, 72, 72, 0.815);
   border-radius: 10px;
 }
 
