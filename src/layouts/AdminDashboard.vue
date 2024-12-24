@@ -1,8 +1,5 @@
 <template>
-  <v-app
-    class="main-blog"
-    style="height: 100vh; scrollbar-width: 5px"
-  >
+  <v-app class="main-blog" style="height: 100vh; scrollbar-width: 5px">
     <!-- Sidebar -->
     <v-navigation-drawer app v-model="sidebarVisible">
       <v-list>
@@ -81,8 +78,7 @@
     </v-app-bar>
 
     <!-- Main Content -->
-    <!-- Main Content -->
-    <v-main class="overflow-y-scroll" style="height: 100vh" color="background">
+    <v-main class="overflow-y-scroll" style="height: 100vh">
       <router-view />
     </v-main>
   </v-app>
@@ -127,7 +123,6 @@ export default {
     profileInitial() {
       return this.currentUser.charAt(0).toUpperCase();
     },
-  
   },
   methods: {
     toggleTheme() {
@@ -153,21 +148,11 @@ export default {
       this.currentTheme = savedTheme;
       this.$vuetify.theme.dark = savedTheme === "dark"; // Vuetify-ning theme.dark holatini yangilash
     }
-  }
-}
+  },
+};
 </script>
 
-<style scoped>
-
-.dark-mode {
-  background-color: #203b37; /* Dark background */
-  color: #ffffff; /* Light text color */
-}
-
-.light-mode {
-  background-color: #ffffff; /* Light background */
-  color: #000000; /* Dark text color */
-}
+<style >
 
 .v-btn {
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);

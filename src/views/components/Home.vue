@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <h1 class="text-center mb-4">O'quvchilar ro'yxati</h1>
+    <h1 class="text-center mb-4 title">O'quvchilar ro'yxati</h1>
 
     <!-- Search bar -->
     <v-text-field
@@ -204,5 +204,8 @@ export default {
 <style scoped>
 .text-center {
   text-align: center;
+}
+.title{
+  background: #091f1f6f ;
 }
 </style>

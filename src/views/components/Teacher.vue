@@ -165,14 +165,24 @@ export default {
             teacherName: this.form.name,
             name: this.form.subject,
           });
-          this.showToast("O'qituvchi muvaffaqiyatli tahrirlandi", "success");
+        } else {
+          await setDoc(doc(db, "subjects", this.form.username), {
+            teacherName: this.form.name,
+            name: this.form.subject,
+          });
+          this.showToast("O'qituvchi muvaffaqiyatli qo'shildi", "success");
         }
         if (this.isEdit) {
           await setDoc(doc(db, "teachers", this.editId), {
             name: this.form.name,
             subject: this.form.subject,
           });
-          this.showToast("O'qituvchi muvaffaqiyatli tahrirlandi", "success");
+        } else {
+          await setDoc(doc(db, "teachers", this.form.username), {
+            name: this.form.name,
+            subject: this.form.subject,
+          });
+          this.showToast("O'qituvchi muvaffaqiyatli qo'shildi", "success");
         }
         if (this.isEdit) {
           await setDoc(doc(db, "users", this.editId), {

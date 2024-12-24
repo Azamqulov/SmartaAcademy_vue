@@ -20,8 +20,8 @@ export default createVuetify({
       },
       dark: {
         primary: "#BB86FC", // Primary rang (Purple)
-        background: "#081b1b", // Qora fon
-        surface: "#081b1b", // Yuzasi
+        background: "#091f1f6f", // Qora fon
+        surface: "#091f1f6f", // Yuzasi
         sidebar: "#203B37", // Yuzasi
         colors:{
           surface: "#263238", // Yuzasi
