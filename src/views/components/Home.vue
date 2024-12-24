@@ -205,7 +205,7 @@ export default {
 .text-center {
   text-align: center;
 }
-.title{
+/* .title{
   background: #091f1f6f ;
-}
+} */
 </style>
