@@ -38,10 +38,11 @@
       </v-card-actions>
     </v-card>
   </v-dialog>
+  <!-- *** -->
 </template>
 
 <script>
-import { collection, getDocs, doc, query, where } from "firebase/firestore";
+import { collection, getDocs,  query, where } from "firebase/firestore";
 import { db } from "@/firebaseConfig";
 
 export default {
@@ -99,7 +100,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .teacher-list {
   display: flex;
   flex-wrap: wrap !important;

@@ -31,7 +31,7 @@
   </v-container>
 </template>
   
-  <script>
+<script>
 import { db } from "@/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 export default {
@@ -86,7 +86,7 @@ export default {
 };
 </script>
   
-  <style scoped>
+<style scoped>
 /* Custom Styles */
 </style>
   

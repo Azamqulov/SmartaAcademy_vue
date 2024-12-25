@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <!-- ***  -->
     <v-card class="pa-5">
       <v-card
         class="v-card-title d-flex justify-between items-center"
@@ -58,7 +59,6 @@
         </template>
       </v-data-table>
     </v-card>
-
     <!-- Teacher Modal -->
     <v-dialog v-model="showModal" max-width="500px">
       <v-card>
@@ -98,6 +98,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <!-- *** -->
   </v-container>
 </template>
 
@@ -130,6 +131,9 @@ export default {
         "Kimyo",
         "Huquq",
         "Ona tili",
+        "Fizika",
+        "Biologiya",
+
       ], // O'qituvchilar uchun fanlar ro'yxati
       showModal: false,
       form: {
