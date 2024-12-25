@@ -5,7 +5,6 @@
       style=""
     >
       <h1 class="px-3">O'quvchilar ma'lumotlari</h1>
-
       <!-- Search bar and action buttons -->
       <v-col class="text-end">
         <v-btn color="green" @click="openAddModal" class=""
@@ -16,7 +15,6 @@
         >
       </v-col>
     </v-row>
-
     <v-text-field
       v-model="search"
       label="Search by Name"
@@ -24,7 +22,6 @@
       clearable
       outlined
     />
-
     <v-data-table
       :headers="headers"
       :items="filteredStudents"
@@ -50,7 +47,6 @@
         </v-btn>
       </template>
     </v-data-table>
-
     <!-- Edit Student Modal -->
     <v-dialog v-model="editModal" max-width="500px">
       <v-card>
@@ -104,7 +100,6 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-
     <!-- Add Student Modal -->
     <v-dialog v-model="addModal" max-width="500px">
       <v-card>
