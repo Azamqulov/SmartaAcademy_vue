@@ -2,9 +2,11 @@ import { createApp } from "vue";
 import { registerPlugins } from "@/plugins";
 import App from "./App.vue";
 import vuetify from "./plugins/vuetify";
-const app = createApp(App);
+import router from "./router"; // Router qo'shildi
 
-registerPlugins(app);
+const app = createApp(App); // Faqat bitta app yaratiladi
 
-app.mount("#app");
-createApp(App).use(router).use(vuetify).mount("#app");
+registerPlugins(app); // Plaginlarni ro‘yxatdan o‘tkazish
+app.use(router).use(vuetify); // Vuetify va Router ulanishi
+
+app.mount("#app"); // Bir marta mount qilish
