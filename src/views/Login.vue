@@ -4,7 +4,7 @@
       <v-img
         class="w-5 h-10"
         height="150px"
-        src="../assets/images/biglogo.png"
+        src="../assets/images/biglogo (1).avif"
         alt="bu yerda logo bor "
       ></v-img>
       <v-card-title class="text-h5 text-center"
