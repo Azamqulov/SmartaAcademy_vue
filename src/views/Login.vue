@@ -1,11 +1,7 @@
 <template>
   <v-container>
     <v-card class="pa-5 mx-auto" max-width="500">
-      <v-img
-        class="w-5 h-10"
-      
-        src="../assets/images/biglogo.png"
-      ></v-img>
+      <v-img class="w-5 h-10" src="../assets/images/biglogo.png"></v-img>
       <v-card-title class="text-h5 text-center"
         >Smart-Academy Login</v-card-title
       >
