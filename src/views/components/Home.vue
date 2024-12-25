@@ -15,7 +15,10 @@
     <v-row class="mb-4 text-center">
       <v-col cols="6" sm="6" md="6">
         <v-card class="elevation-1">
-          <v-card-title>O'quvchilar soni</v-card-title>
+          <v-card-title>
+            <span class="title-text">O'quvchilar soni</span>
+            <span class="icon"> <i class="fa-solid fa-user"></i></span
+          ></v-card-title>
           <v-card-subtitle style="font-size: 20px"
             >{{ totalStudents }} ta</v-card-subtitle
           >
@@ -24,8 +27,12 @@
 
       <v-col cols="6" sm="6" md="6">
         <v-card class="elevation-1 text-center">
-          <v-card-title>Jammi to'lovlar</v-card-title>
-          <v-card-subtitle class="text-4xl" style="font-size: 20px"
+          <v-card-title
+            ><span class="title-text">Jammi to'lovlar </span>
+            <span class="icon">
+              <i class="fa-solid fa-money-bill-wave"></i></span
+          ></v-card-title>
+          <v-card-subtitle class="text-4xl" style="font-size: 20px; flex-wrap: wrap;"
             >{{ totalPayments }} so'm</v-card-subtitle
           >
         </v-card>
@@ -205,11 +212,21 @@ export default {
 .text-center {
   text-align: center;
 }
+.icon {
+  display: none;
+}
 @media (max-width: 390px) {
-  .title{
+  .title {
     margin: 38px 0 0 0;
   }
+  .title-text {
+    display: none;
+  }
+  .icon {
+    display: block;
+  }
 }
+
 /* .title{
   background: #091f1f6f ;
 } */
