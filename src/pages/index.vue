@@ -1,6 +1,8 @@
 <template>
   <v-app>
+    <!-- *** -->
     <MainLayout />
+    <!-- *** -->
   </v-app>
 </template>
 

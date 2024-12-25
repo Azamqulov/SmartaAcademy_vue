@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <!-- *** -->
     <v-card>
       <v-data-table
         :headers="headers"
@@ -71,6 +72,7 @@
         </tfoot>
       </v-data-table>
     </v-card>
+    <!-- *** -->
   </v-container>
 </template>
 

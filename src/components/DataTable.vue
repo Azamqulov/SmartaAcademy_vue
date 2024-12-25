@@ -1,8 +1,9 @@
 <template>
+  <!--  -->
   <v-app>
+    <!-- *** -->
     <v-container>
       <h1 class="text-center mb-4">Student Data Table</h1>
-
       <!-- Search bar -->
       <v-text-field
         v-model="search"
@@ -11,7 +12,6 @@
         clearable
         outlined
       />
-
       <!-- Data Table -->
       <v-data-table
         :headers="headers"
@@ -32,7 +32,9 @@
         </template>
       </v-data-table>
     </v-container>
+    <!-- *** -->
   </v-app>
+  <!--  -->
 </template>
 
 <script>

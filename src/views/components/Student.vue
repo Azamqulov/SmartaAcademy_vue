@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <!-- *** -->
     <v-row
       class="d-flex justify-space-between justify-between mb-4 mt-8 title-student"
       style=""
@@ -15,6 +16,7 @@
         >
       </v-col>
     </v-row>
+    <!-- Title-student end -->
     <v-text-field
       v-model="search"
       label="Search by Name"
@@ -22,6 +24,7 @@
       clearable
       outlined
     />
+    <!-- Date end -->
     <v-data-table
       :headers="headers"
       :items="filteredStudents"
@@ -157,6 +160,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <!-- *** -->
   </v-container>
 </template>
 

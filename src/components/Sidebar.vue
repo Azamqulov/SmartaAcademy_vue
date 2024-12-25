@@ -1,5 +1,7 @@
 <template>
+  <!-- *** -->
   <v-navigation-drawer app color="grey lighten-4" v-model="sidebarVisible" permanent>
+    <!--  -->
     <v-list>
       <v-list-item>
         <v-list-item-content>
@@ -14,10 +16,9 @@
         <v-list-item-title>{{ item.title }}</v-list-item-title>
       </v-list-item>
     </v-list>
-
     <!-- Sidebarni boshqarish uchun yon tugma -->
-    
   </v-navigation-drawer>
+  <!-- *** -->
 </template>
 
 <script>

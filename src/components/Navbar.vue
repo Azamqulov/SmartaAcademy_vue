@@ -1,4 +1,5 @@
 <template>
+  <!-- *** -->
   <v-app>
     <v-app-bar app class="navbar">
       <v-toolbar-title>
@@ -11,13 +12,14 @@
         </div>
       </v-toolbar-title>
     </v-app-bar>
-
+    <!-- --- -->
     <v-container>
       <!-- Sayt mazmuni -->
     </v-container>
   </v-app>
+  <!-- *** -->
 </template>
-  <script>
+<script>
 export default {
   data() {
     return {
@@ -40,7 +42,6 @@ export default {
   background-color: #fff;
   color: #000;
 }
-
 .v-avatar {
   background-color: #000;
   color: #fff;

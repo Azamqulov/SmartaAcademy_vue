@@ -1,10 +1,12 @@
 <template>
+  <!-- **** -->
   <div class="page-404 h-full">
     <v-btn class="mt-16 ml-10 bg-black" @click="$router.back()">
       <v-icon start icon="mdi-arrow-left"></v-icon>
       Orqaga qaytish
     </v-btn>
   </div>
+  <!-- **** -->
 </template>
 <script>
 export default {};

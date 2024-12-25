@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <!-- **** -->
     <v-card class="pa-5 mx-auto" max-width="500">
       <v-img
         class="w-5 h-10"
@@ -44,6 +45,7 @@
         </v-alert>
       </v-form>
     </v-card>
+    <!-- **** -->
   </v-container>
 </template>
 
@@ -110,17 +112,14 @@ export default {
   align-items: center;
   height: 100vh;
 }
-
 .v-card {
   box-shadow: 0 5px 5px rgba(74, 72, 72, 0.815);
   border-radius: 10px;
 }
-
 .v-btn {
   background-color: #007bff;
   color: white;
 }
-
 .v-alert {
   margin-top: 10px;
 }

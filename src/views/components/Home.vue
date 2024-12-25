@@ -1,7 +1,7 @@
 <template>
   <v-container>
+    <!-- *** -->
     <h1 class="text-center mb-4 title">O'quvchilar ro'yxati</h1>
-
     <!-- Search bar -->
     <v-text-field
       v-model="search"
@@ -10,7 +10,6 @@
       clearable
       outlined
     />
-
     <!-- Summary Information -->
     <v-row class="mb-4 text-center main-content">
       <v-col cols="12" sm="6" md="6">
@@ -40,7 +39,6 @@
         </v-card>
       </v-col>
     </v-row>
-
     <!-- Data Table -->
     <v-data-table
       :headers="headers"
@@ -60,6 +58,7 @@
         </v-alert>
       </template>
     </v-data-table>
+    <!-- *** -->
   </v-container>
 </template>
 

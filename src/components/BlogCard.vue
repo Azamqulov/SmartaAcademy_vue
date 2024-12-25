@@ -1,12 +1,15 @@
 <template>
   <v-container>
-
+    <!-- *** -->
     <v-card class="text-center">
+      <!--  -->
       <v-card-title>{{ title }}</v-card-title>
-      <v-card-subtitle class="headline text-3xl" style="font-size: 20px;">
+      <!--  -->
+      <v-card-subtitle class="headline text-3xl" style="font-size: 20px">
         {{ value }}
       </v-card-subtitle>
     </v-card>
+    <!-- *** -->
   </v-container>
 </template>
 
