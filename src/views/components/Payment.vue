@@ -9,13 +9,14 @@
         dense
       >
         <template v-slot:top>
-          <v-toolbar flat>
-            <v-toolbar-title>O'quvchilar To'lov Jadvali</v-toolbar-title>
+          <v-toolbar flat class="title-blog">
+            <v-toolbar-title class="">O'quvchilar To'lov Jadvali</v-toolbar-title> 
+            <br>
             <v-text-field
               v-model="search"
               label="Qidirish"
               prepend-icon="mdi-magnify"
-              class="mt-6"
+              class="mt-6 none-title"
             />
           </v-toolbar>
         </template>
@@ -26,7 +27,11 @@
             <td class="text-center">F.I.SH</td>
 
             <!-- Dynamic month headers -->
-            <td class="text-center" v-for="(month, index) in months" :key="index">
+            <td
+              class="text-center"
+              v-for="(month, index) in months"
+              :key="index"
+            >
               {{ month }}
             </td>
             <td></td>
@@ -49,7 +54,7 @@
                 :value="true"
                 color="success"
                 dense
-                @change="updatePayments(student.id, student.payments)" 
+                @change="updatePayments(student.id, student.payments)"
               ></v-checkbox>
             </td>
           </tr>
@@ -57,7 +62,7 @@
 
         <tfoot>
           <tr>
-            <td colspan="2"><strong>Jami</strong> </td>
+            <td colspan="2"><strong>Jami</strong></td>
             <td v-for="monthIndex in 12" :key="monthIndex" class="text-center">
               <strong>{{ calculateMonthlyTotal(monthIndex - 1) }}</strong>
             </td>
@@ -70,60 +75,63 @@
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
 import { db } from "@/firebaseConfig"; // Firebase konfiguratsiyasi
-import { collection, getDocs, doc, updateDoc, query, where } from "firebase/firestore"; // Firestore bilan ishlash uchun kerakli metodlar
-import Toastify from 'toastify-js'; // Import Toastify
+import {
+  collection,
+  getDocs,
+  doc,
+  updateDoc,
+  query,
+  where,
+} from "firebase/firestore"; // Firestore bilan ishlash uchun kerakli metodlar
+import Toastify from "toastify-js"; // Import Toastify
 
 export default {
   data() {
     return {
       search: "", // Qidiruv so'rovi
-      months: [ // Oylik nomlar ro'yxati
-        "Yanvar", "Fevral", "Mart", "Aprel", "May", "Iyun", "Iyul", "Avgust", "Sentabr", "Oktabr", "Noyabr", "Dekabr"
+      months: [
+        // Oylik nomlar ro'yxati
+        "Yanvar",
+        "Fevral",
+        "Mart",
+        "Aprel",
+        "May",
+        "Iyun",
+        "Iyul",
+        "Avgust",
+        "Sentabr",
+        "Oktabr",
+        "Noyabr",
+        "Dekabr",
       ],
-      currentUser: null, // Hozirda tizimda kirgan o'qituvchi nomi (bu dinamik bo'lishi kerak)
+      currentUser: null,
       role: null, // "admin" yoki "teacher"
       students: [], // O'quvchilar ro'yxati
     };
   },
   computed: {
     filteredStudents() {
-      // if (this.role === "admin") {
-      //   return this.students.filter((student) =>
-      //     student.name.toLowerCase().includes(this.search.toLowerCase()) ||
-      //     student.surname.toLowerCase().includes(this.search.toLowerCase())
-      //   );
-      // } else {
-      //   return this.students
-      //     .filter((student) =>
-      //       student.teacher && student.teacher.name
-      //         ? student.teacher.name.toLowerCase() === this.currentUser.toLowerCase()
-      //         : false
-      //     )
-      //     .filter((student) =>
-      //       student.name.toLowerCase().includes(this.search.toLowerCase()) ||
-      //       student.surname.toLowerCase().includes(this.search.toLowerCase())
-      //     );
-      // }
       if (this.role === "admin") {
-  return this.students.filter((student) =>
-    student.name.toLowerCase().includes(this.search.toLowerCase()) ||
-    student.surname.toLowerCase().includes(this.search.toLowerCase())
-  );
-} else {
-  return this.students
-    .filter((student) =>
-      student.teacher && student.teacher.name
-        ? student.teacher.name.toLowerCase() === this.currentUser.toLowerCase()
-        : false
-    )
-    .filter((student) =>
-      student.name.toLowerCase().includes(this.search.toLowerCase()) ||
-      student.surname.toLowerCase().includes(this.search.toLowerCase())
-    );
-}
-
+        return this.students.filter(
+          (student) =>
+            student.name.toLowerCase().includes(this.search.toLowerCase()) ||
+            student.surname.toLowerCase().includes(this.search.toLowerCase())
+        );
+      } else {
+        return this.students
+          .filter((student) =>
+            student.teacher && student.teacher.name
+              ? student.teacher.name.toLowerCase() ===
+                this.currentUser.toLowerCase()
+              : false
+          )
+          .filter(
+            (student) =>
+              student.name.toLowerCase().includes(this.search.toLowerCase()) ||
+              student.surname.toLowerCase().includes(this.search.toLowerCase())
+          );
+      }
     },
   },
   methods: {
@@ -148,7 +156,7 @@ export default {
           }
           return {
             ...studentData,
-            id: doc.id
+            id: doc.id,
           };
         });
         console.log(this.students); // O'quvchilarni tekshirish
@@ -213,5 +221,16 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+@media (max-width: 390px) {
+  .title-blog{
+    flex-direction: column !important;
+
+    margin: 50px 0 0 0;
+  }
+  .none-title{
+    display: none;
+  }
+  
 }
 </style>

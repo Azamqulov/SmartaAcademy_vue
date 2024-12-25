@@ -2,8 +2,8 @@
   <v-container>
     <v-row justify="center">
       <!-- Profil Kartasi -->
-      <v-col cols="12" md="10" lg="7">
-        <v-card class="pa-4 m-auto" outlined>
+      <v-col cols="12" md="12" lg="7">
+        <v-card class="pa-4 m-auto main-blog" outlined>
           <v-card-title>
             <v-avatar size="100" class="avatar-main">
               <template v-if="teacher.photoURL">
@@ -36,7 +36,7 @@
               <h4 class="grey--text">Fan: {{ teacher.subject }}</h4>
             </div>
           </v-card-title>
-          <v-card-actions>
+          <v-card-actions class="all-btn">
             <v-btn color="primary" @click="openEditModal"> Tahrirlash</v-btn>
             <v-btn color="secondary" @click="openLoginEditModal"
               >Parolni Tahrirlash</v-btn
@@ -287,6 +287,14 @@ export default {
     flex-direction: column;
     margin-top: 50px !important;
     flex-wrap: wrap !important;
+  }
+  .main-blog {
+    flex-direction: column;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .all-btn {
+    flex-direction: column;
   }
 }
 </style>

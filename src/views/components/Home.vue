@@ -205,6 +205,11 @@ export default {
 .text-center {
   text-align: center;
 }
+@media (max-width: 390px) {
+  .title{
+    margin: 38px 0 0 0;
+  }
+}
 /* .title{
   background: #091f1f6f ;
 } */

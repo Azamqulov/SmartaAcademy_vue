@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row
-      class="d-flex justify-space-between justify-between mb-4 mt-8"
+      class="d-flex justify-space-between justify-between mb-4 mt-8 title-student"
       style=""
     >
       <h1 class="px-3">O'quvchilar ma'lumotlari</h1>
@@ -11,7 +11,7 @@
         <v-btn color="green" @click="openAddModal" class=""
           >o'quvchi qo'shish</v-btn
         >
-        <v-btn color="yellow" class="ml-4" @click="exportToExcel">
+        <v-btn color="yellow" class="ml-4 left-btn" @click="exportToExcel">
           Excel yuklash</v-btn
         >
       </v-col>
@@ -221,20 +221,7 @@ export default {
     };
   },
   computed: {
-    // Filter students based on current teacher and search query
     filteredStudents() {
-      // return this.students
-      //   .filter((student) =>
-      //     student.teacher && student.teacher.name
-      //       ? student.teacher.name.toLowerCase() ===
-      //         this.currentUser.toLowerCase()
-      //       : false
-      //   )
-      //   .filter(
-      //     (student) =>
-      //       student.name.toLowerCase().includes(this.search.toLowerCase()) ||
-      //       student.surname.toLowerCase().includes(this.search.toLowerCase())
-      //   );
       if (this.role === "admin") {
         return this.students.filter(
           (student) =>
@@ -452,3 +439,20 @@ export default {
   },
 };
 </script>
+<style>
+@media (max-width: 390px) {
+  .title-student {
+    text-align: center;
+  }
+  .text-end{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin: 0 auto;
+  }
+  .left-btn{
+    margin: 10px 0 !important;
+  }
+}
+</style>
