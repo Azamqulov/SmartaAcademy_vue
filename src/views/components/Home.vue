@@ -32,7 +32,9 @@
             <span class="icon">
               <i class="fa-solid fa-money-bill-wave"></i></span
           ></v-card-title>
-          <v-card-subtitle class="text-4xl" style="font-size: 20px; flex-wrap: wrap;"
+          <v-card-subtitle
+            class="text-4xl"
+            style="font-size: 20px; flex-wrap: wrap"
             >{{ totalPayments }} so'm</v-card-subtitle
           >
         </v-card>
