@@ -222,8 +222,9 @@ export default {
   align-items: center;
   justify-content: center;
 }
-@media (max-width: 390px) {
+@media (max-width: 400px) {
   .title-blog{
+    text-align: center;
     flex-direction: column !important;
 
     margin: 50px 0 0 0;

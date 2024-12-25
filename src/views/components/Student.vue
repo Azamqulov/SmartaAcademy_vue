@@ -444,14 +444,14 @@ export default {
   .title-student {
     text-align: center;
   }
-  .text-end{
+  .text-end {
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
     margin: 0 auto;
   }
-  .left-btn{
+  .left-btn {
     margin: 10px 0 !important;
   }
 }

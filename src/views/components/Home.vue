@@ -217,7 +217,7 @@ export default {
 .icon {
   display: none;
 }
-@media (max-width: 390px) {
+@media (max-width: 400px) {
   .title {
     margin: 38px 0 0 0;
   }
@@ -228,8 +228,4 @@ export default {
     display: block;
   }
 }
-
-/* .title{
-  background: #091f1f6f ;
-} */
 </style>

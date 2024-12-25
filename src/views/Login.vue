@@ -3,9 +3,8 @@
     <v-card class="pa-5 mx-auto" max-width="500">
       <v-img
         class="w-5 h-10"
-        height="150px"
+      
         src="../assets/images/biglogo.png"
-        alt="bu yerda logo bor "
       ></v-img>
       <v-card-title class="text-h5 text-center"
         >Smart-Academy Login</v-card-title
@@ -49,7 +48,6 @@
 <script>
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "@/firebaseConfig";
-
 export default {
   data() {
     return {
@@ -64,21 +62,17 @@ export default {
       try {
         // Foydalanuvchi ma'lumotlarini Firebase'dan olish
         const userDoc = await getDoc(doc(db, "users", this.username));
-
         // Foydalanuvchi mavjudligini tekshirish
         if (!userDoc.exists()) {
           this.error = "Foydalanuvchi topilmadi!";
           return;
         }
-
         const user = userDoc.data();
-
         // Parolni tekshirish
         if (this.password !== user.password) {
           this.error = "Parol noto‘g‘ri!";
           return;
         }
-
         // Role tekshirish va yo‘naltirish
         const role = user.role;
 
