@@ -7,22 +7,13 @@ export {};
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    AppFooter: typeof import('./src/components/AppFooter.vue')['default']
     BlogCard: typeof import('./src/components/BlogCard.vue')['default']
-    DarkModeToggle: typeof import('./src/components/DarkModeToggle.vue')['default']
     DashboardOverview: typeof import('./src/components/DashboardOverview.vue')['default']
     DataTable: typeof import('./src/components/DataTable.vue')['default']
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     Navbar: typeof import('./src/components/Navbar.vue')['default']
-    Notifications: typeof import('./src/components/Notifications.vue')['default']
-    PaymentsManager: typeof import('./src/components/PaymentsManager.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Sidebar: typeof import('./src/components/Sidebar.vue')['default']
-    Statistics: typeof import('./src/components/Statistics.vue')['default']
     StudentsList: typeof import('./src/components/StudentsList.vue')['default']
-    TaskManager: typeof import('./src/components/TaskManager.vue')['default']
-    TeachersList: typeof import('./src/components/TeachersList.vue')['default']
-    TestResults: typeof import('./src/components/TestResults.vue')['default']
   }
 }

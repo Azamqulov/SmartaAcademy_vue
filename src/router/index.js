@@ -10,14 +10,6 @@ import Login from "@/views/Login.vue";
 import MainLayout from "../layouts/MainLayout.vue";
 import AdminDashboard from "@/layouts/AdminDashboard.vue";
 
-// const routes = [
-//   { path: '/home', component: Home },
-//   { path: '/teacher', component: Teacher },
-//   { path: '/student', component: Student },
-//   { path: '/', component: Login },
-//   { path: '/admin-dashboard', component: AdminDashboard },
-//   { path: '/teacher-dashboard', component: TeacherDashboard },
-// ];
 import page404 from "@/views/404.vue"
 const routes = [
   {
