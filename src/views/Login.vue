@@ -5,7 +5,8 @@
         class="w-5 h-10"
         height="150px"
         src="../assets/images/biglogo (1).avif"
-        alt="logo" loading="lazy"
+        alt="logo"
+        loading="lazy"
       ></v-img>
       <v-card-title class="text-h5 text-center"
         >Smart-Academy Login</v-card-title
