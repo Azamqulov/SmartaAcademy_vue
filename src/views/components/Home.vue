@@ -12,8 +12,8 @@
     />
 
     <!-- Summary Information -->
-    <v-row class="mb-4 text-center">
-      <v-col cols="6" sm="6" md="6">
+    <v-row class="mb-4 text-center main-content">
+      <v-col cols="12" sm="6" md="6">
         <v-card class="elevation-1">
           <v-card-title>
             <span class="title-text">O'quvchilar soni</span>
@@ -25,7 +25,7 @@
         </v-card>
       </v-col>
 
-      <v-col cols="6" sm="6" md="6">
+      <v-col cols="12" sm="6" md="6">
         <v-card class="elevation-1 text-center">
           <v-card-title
             ><span class="title-text">Jammi to'lovlar </span>
@@ -222,10 +222,18 @@ export default {
     margin: 38px 0 0 0;
   }
   .title-text {
-    display: none;
+    /* display: none; */
   }
   .icon {
     display: block;
+  }
+  .main-content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .elevation-1{
+    
   }
 }
 </style>

@@ -45,7 +45,6 @@
         </v-card>
       </v-col>
     </v-row>
-
     <!-- Tahrirlash Modal -->
     <v-dialog v-model="editModal" max-width="500">
       <v-card>
@@ -77,7 +76,6 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-
     <!-- Login va Parol Tahrirlash Modal -->
     <v-dialog v-model="loginEditModal" max-width="500">
       <v-card>
@@ -106,7 +104,6 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-
     <!-- Admin Paneli -->
     <v-row v-if="isAdmin" class="mt-5">
       <v-col cols="12" md="4">
@@ -171,25 +168,20 @@ export default {
   methods: {
     async fetchTeacher() {
       const teacherName = localStorage.getItem("teacherName");
-
       if (teacherName) {
         this.editForm.name = teacherName;
       }
-
       const teacherRef = doc(db, "users", teacherName);
       const docSnap = await getDoc(teacherRef);
-
       if (docSnap.exists()) {
         this.teacher = docSnap.data();
         this.editForm.subject = this.teacher.subject;
         this.editForm.username = this.teacher.username;
         this.editForm.password = this.teacher.password;
       }
-
       // Fetch subjects from Firestore
       await this.fetchSubjects();
     },
-
     async fetchSubjects() {
       try {
         const querySnapshot = await getDocs(collection(db, "subjects"));
@@ -216,7 +208,6 @@ export default {
         this.teacher.name = this.editForm.name;
         this.teacher.subject = this.editForm.subject;
         this.closeEditModal();
-
         // Success notification
         Toastify({
           text: "Ma'lumotlar muvaffaqiyatli saqlandi",
@@ -249,7 +240,6 @@ export default {
         this.teacher.username = this.editForm.username;
         this.teacher.password = this.editForm.password;
         this.closeLoginEditModal();
-
         // Success notification
         Toastify({
           text: "Login va parol muvaffaqiyatli saqlandi",

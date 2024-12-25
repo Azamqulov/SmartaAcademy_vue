@@ -254,11 +254,6 @@ export default {
       console.error("No teacher logged in. Please log in to view students.");
     }
   },
-  async mounted() {
-    await this.loadStudents();
-    await this.loadSubjects();
-    await this.loadTeachers();
-  },
   methods: {
     // Fetch students data from Firebase
     async loadStudents() {
@@ -272,7 +267,6 @@ export default {
         console.error("Error loading students:", error);
       }
     },
-
     // Fetch subjects data from Firebase
     async loadSubjects() {
       try {
@@ -282,19 +276,8 @@ export default {
         console.error("Error loading teachers:", error);
       }
     },
-
     // Fetch teachers data from Firebase
     async loadTeachers() {
-      // try {
-      //   const querySnapshot = await getDocs(collection(db, "teachers"));
-      //   this.teachers = querySnapshot.docs.map((doc) => ({
-      //     id: doc.id,
-      //     name: doc.data().name, // Faqat teacher name ni olamiz
-      //   }));
-      //   console.log("Teachers loaded:", this.teachers);
-      // } catch (error) {
-      //   console.error("Error loading teachers:", error);
-      // }
       try {
         const querySnapshot = await getDocs(collection(db, "teachers"));
         this.teachers = querySnapshot.docs.map((doc) => doc.data().name); // Saqlash faqat `name` stringini
@@ -302,7 +285,6 @@ export default {
         console.error("Error loading teachers:", error);
       }
     },
-
     // Open Add Student Modal
     openAddModal() {
       this.newStudent = {
@@ -315,7 +297,6 @@ export default {
       }; // Reset the form
       this.addModal = true; // Open the modal
     },
-
     // Add new student to Firebase
     async addStudent() {
       try {
@@ -357,7 +338,6 @@ export default {
         }).showToast();
       }
     },
-
     // Delete a student from Firebase
     async deleteStudent(student) {
       try {
@@ -382,13 +362,11 @@ export default {
         }).showToast();
       }
     },
-
     // Open Edit Student Modal
     editStudent(student) {
       this.editedStudent = { ...student };
       this.editModal = true; // Open the edit modal
     },
-
     // Update student details in Firebase
     async updateStudent() {
       try {
@@ -428,7 +406,6 @@ export default {
         }).showToast();
       }
     },
-
     // Export student data to Excel
     exportToExcel() {
       const ws = XLSX.utils.json_to_sheet(this.filteredStudents);
@@ -436,6 +413,11 @@ export default {
       XLSX.utils.book_append_sheet(wb, ws, "Students");
       XLSX.writeFile(wb, "students.xlsx");
     },
+  },
+  async mounted() {
+    await this.loadStudents();
+    await this.loadSubjects();
+    await this.loadTeachers();
   },
 };
 </script>
