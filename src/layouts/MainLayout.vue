@@ -7,7 +7,7 @@
           <v-list-item-content class="rounded m-auto text-center">
             <router-link to="/">
               <v-img
-                src="../assets/images/biglogo.png"
+                src="@/assets/images/biglogo.png"
                 alt="Smart Academy Logo"
                 max-width="150"
                 class="ml-8"
