@@ -6,7 +6,7 @@
         :headers="headers"
         :items="filteredStudents"
         item-value="id"
-        class="elevation-1 rounded-lg"
+        class="elevation-1 rounded-lg  text-capitalize"
         dense
       >
         <template v-slot:top>

@@ -1,6 +1,11 @@
 <template>
   <!-- *** -->
-  <v-navigation-drawer app color="grey lighten-4" v-model="sidebarVisible" permanent>
+  <v-navigation-drawer
+    app
+    color="grey lighten-4"
+    v-model="sidebarVisible"
+    permanent
+  >
     <!--  -->
     <v-list>
       <v-list-item>

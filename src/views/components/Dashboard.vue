@@ -85,6 +85,7 @@
             v-model="editForm.username"
             label="Login"
             outlined
+            disabled
           ></v-text-field>
 
           <!-- Parolni ko'rish va yashirish -->

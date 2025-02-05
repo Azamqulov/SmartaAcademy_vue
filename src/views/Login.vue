@@ -5,7 +5,7 @@
       <v-img
         class="w-5 h-10"
         height="150px"
-        src="../assets/images/biglogo (1).avif"
+        src="../assets/images/biglogo.png"
         alt="logo"
         loading="lazy"
       ></v-img>

@@ -39,7 +39,7 @@
         <!-- Display teacher name -->
         {{ item.teacher.name }}
       </template>
-      <template v-slot:item.actions="{ item }">
+      <template v-slot:item.actions="{ item }" class="d-flex gap-2">
         <!-- Edit Button -->
         <v-btn class="mr-2" color="blue" @click="editStudent(item)">
           <v-icon>mdi-pencil</v-icon>
@@ -56,17 +56,30 @@
         <v-card-title class="headline">O'quvchini taxrirlash</v-card-title>
         <v-card-text>
           <v-form>
-            <v-text-field v-model="editedStudent.name" label="Ism" required />
+            <v-text-field
+              v-model="editedStudent.name"
+              label="Ism"
+              required
+              :rules="[
+                (v) => v?.length >= 3 || 'Kamida 3 ta belgi bo\'lishi kerak',
+              ]"
+            />
             <v-text-field
               v-model="editedStudent.surname"
               label="Familya"
               required
+              :rules="[
+                (v) => v?.length >= 3 || 'Kamida 3 ta belgi bo\'lishi kerak',
+              ]"
             />
             <v-text-field
               v-model="editedStudent.phone"
               label="Telefon raqam"
               type="number"
               required
+              :rules="[
+                (v) => v?.length >= 9 || 'To\'g\'ri kiriting telefon raqamni ',
+              ]"
             />
             <v-select
               v-model="editedStudent.subject"
@@ -82,6 +95,7 @@
               item-text="name"
               item-value="id"
               label="O'qtuvchi"
+              required
             />
             <v-text-field
               v-model="editedStudent.payment"
@@ -93,7 +107,6 @@
               v-model="editedStudent.date"
               label="Date"
               type="date"
-              required
             />
           </v-form>
         </v-card-text>
@@ -109,12 +122,22 @@
         <v-card-title class="headline">O'quvchi qo'shish </v-card-title>
         <v-card-text>
           <v-form>
-            <v-text-field v-model="newStudent.name" label="Ism" required />
+            <v-text-field
+              v-model="newStudent.name"
+              label="Ism"
+              required
+              :rules="[
+                (v) => v?.length >= 3 || 'Kamida 3 ta belgi bo\'lishi kerak',
+              ]"
+            />
             <v-text-field
               v-model="newStudent.surname"
               label="Familya"
               min-lenth="3"
               required
+              :rules="[
+                (v) => v?.length >= 3 || 'Kamida 3 ta belgi bo\'lishi kerak',
+              ]"
             />
             <v-text-field
               v-model="newStudent.phone"
@@ -122,6 +145,9 @@
               type="number"
               required
               maxlength="10"
+              :rules="[
+                (v) => v?.length >= 9 || 'To\'g\'ri kiriting telefon raqamni ',
+              ]"
             />
             <v-select
               v-model="newStudent.subject"
@@ -130,6 +156,7 @@
               item-value="name"
               label="Fan"
               required
+              :rules="[(v) => v?.length >= 2 || 'Fan tanlanmadi']"
             />
             <v-select
               v-model="newStudent.teacher"
@@ -139,6 +166,7 @@
               label="O'qtuvchi"
               required
               outlined
+              :rules="[(v) => v?.length >= 2 || 'O\'qtuvchi tanlanmadi']"
             />
             <v-text-field
               v-model="newStudent.payment"
@@ -151,11 +179,17 @@
               label="Kelgan sanasi"
               type="date"
               required
+              :rules="[(v) => v?.length >= 2 || 'Sana kiritilmadi ']"
             />
           </v-form>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="blue" @click="addStudent">Qo'shish</v-btn>
+          <v-btn
+            color="blue"
+            :disabled="!newStudent.name || newStudent.name.length < 3"
+            @click="addStudent"
+            >Qo'shish</v-btn
+          >
           <v-btn color="red" @click="addModal = false">Bekor qilish</v-btn>
         </v-card-actions>
       </v-card>
