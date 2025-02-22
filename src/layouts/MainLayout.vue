@@ -32,7 +32,7 @@
       </v-list>
       <v-btn
         @click="logout"
-        class="w-full bg-red-700 mx-3" color="dark"
+        class="w-full bg-red-700 mx-3 text-white" color="dark"
         style="position: absolute; bottom: 10px; background: red; width: 90%"
       >
         <v-icon>mdi-logout</v-icon>
@@ -76,7 +76,11 @@
 
     <!-- Main Content -->
     <v-main class="overflow-y-scroll" style="height: 100vh">
-      <router-view />
+      <router-view v-slot="{ Component }">
+        <transition name="fade" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </v-main>
   </v-app>
 </template>

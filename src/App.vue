@@ -3,7 +3,11 @@
     <!--  -->
     <v-main>
       <!--  -->
-      <router-view />
+      <router-view v-slot="{ Component }">
+        <transition name="fade" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
       <!--  -->
     </v-main>
     <!--  -->
@@ -13,5 +17,21 @@
 <script setup>
 //
 </script>
-<style scoped>
+<style>
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.fade-enter-active {
+  animation: fadeIn 0.5s;
+}
+.fade-leave-active {
+  animation: fadeOut 0.5s;
+}
 </style>
