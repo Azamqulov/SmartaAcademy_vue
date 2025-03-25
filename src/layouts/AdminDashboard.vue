@@ -159,6 +159,15 @@ export default {
 
 <style >
 
+.dark-mode {
+  background-color: #203b37; /* Dark background */
+  color: #ffffff; /* Light text color */
+}
+
+.light-mode {
+  background-color: #ffffff; /* Light background */
+  color: #000000; /* Dark text color */
+}
 .v-btn {
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
