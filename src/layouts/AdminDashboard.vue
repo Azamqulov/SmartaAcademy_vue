@@ -71,7 +71,7 @@
 
       <!-- Profile Section -->
       <v-spacer></v-spacer>
-      <v-avatar color="primary" class="rounded-full mr-4">
+      <v-avatar color="blue" class="rounded-full mr-4">
         <router-link to="/admin-dashboard/admin">
           <v-btn text color="surface">{{ profileInitial }}</v-btn>
         </router-link>

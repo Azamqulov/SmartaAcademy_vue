@@ -1,200 +1,469 @@
 <template>
-  <v-container>
-    <!-- *** -->
-    <v-row
-      class="d-flex justify-space-between justify-between mb-4 mt-8 title-student"
-      style=""
+  <v-container fluid class="student-dashboard pa-0">
+    <!-- Dashboard Header with Gradient Background -->
+    <v-sheet
+      class="header-banner mb-6 pa-6  d-flex flex-column justify-center"
+      color="blue"
+      elevation="4"
+      height="180"
     >
-      <h1 class="px-3">O'quvchilar ma'lumotlari</h1>
-      <!-- Search bar and action buttons -->
-      <v-col class="text-end">
-        <v-btn color="green" @click="openAddModal" class=""
-          >o'quvchi qo'shish</v-btn
-        >
-        <v-btn color="yellow" class="ml-4 left-btn" @click="exportToExcel">
-          Excel yuklash</v-btn
-        >
-      </v-col>
-    </v-row>
-    <!-- Title-student end -->
-    <v-text-field
-      v-model="search"
-      label="Search by Name"
-      class="mb-4"
-      clearable
-      outlined
-    />
-    <!-- Date end -->
-    <v-data-table
-      :headers="headers"
-      :items="filteredStudents"
-      :items-per-page="10"
-      class="elevation-1 text-capitalize"
-    >
-      <template v-slot:item.index="{ index }">
-        <!-- Display sequence number based on index and pagination -->
-        {{ index + 1 }}
-      </template>
-      <template v-slot:item.teacher="{ item }">
-        <!-- Display teacher name -->
-        {{ item.teacher.name }}
-      </template>
-      <template v-slot:item.actions="{ item }" class="d-flex gap-2">
-        <!-- Edit Button -->
-        <v-btn class="mr-2" color="blue" @click="editStudent(item)">
-          <v-icon>mdi-pencil</v-icon>
-        </v-btn>
-        <!-- Delete Button -->
-        <v-btn color="red" @click="deleteStudent(item)">
-          <v-icon>mdi-delete</v-icon>
-        </v-btn>
-      </template>
-    </v-data-table>
-    <!-- Edit Student Modal -->
-    <v-dialog v-model="editModal" max-width="500px">
-      <v-card>
-        <v-card-title class="headline">O'quvchini taxrirlash</v-card-title>
-        <v-card-text>
-          <v-form>
-            <v-text-field
-              v-model="editedStudent.name"
-              label="Ism"
-              required
-              :rules="[
-                (v) => v?.length >= 3 || 'Kamida 3 ta belgi bo\'lishi kerak',
-              ]"
-            />
-            <v-text-field
-              v-model="editedStudent.surname"
-              label="Familya"
-              required
-              :rules="[
-                (v) => v?.length >= 3 || 'Kamida 3 ta belgi bo\'lishi kerak',
-              ]"
-            />
-            <v-text-field
-              v-model="editedStudent.phone"
-              label="Telefon raqam"
-              type="number"
-              required
-              :rules="[
-                (v) => v?.length >= 9 || 'To\'g\'ri kiriting telefon raqamni ',
-              ]"
-            />
-            <v-select
-              v-model="editedStudent.subject"
-              :items="subjects"
-              item-text="name"
-              item-value="name"
-              label="Fan"
-              required
-            />
-            <v-select
-              v-model="editedStudent.teacher"
-              :items="teachers"
-              item-text="name"
-              item-value="id"
-              label="O'qtuvchi"
-              required
-            />
-            <v-text-field
-              v-model="editedStudent.payment"
-              label="To'lov summasi"
-              type="number"
-              required
-            />
-            <v-text-field
-              v-model="editedStudent.date"
-              label="Date"
-              type="date"
-            />
-          </v-form>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn color="blue" @click="updateStudent">saqlash</v-btn>
-          <v-btn color="red" @click="editModal = false">bekor qilish</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <!-- Add Student Modal -->
-    <v-dialog v-model="addModal" max-width="500px">
-      <v-card>
-        <v-card-title class="headline">O'quvchi qo'shish </v-card-title>
-        <v-card-text>
-          <v-form>
-            <v-text-field
-              v-model="newStudent.name"
-              label="Ism"
-              required
-              :rules="[
-                (v) => v?.length >= 3 || 'Kamida 3 ta belgi bo\'lishi kerak',
-              ]"
-            />
-            <v-text-field
-              v-model="newStudent.surname"
-              label="Familya"
-              min-lenth="3"
-              required
-              :rules="[
-                (v) => v?.length >= 3 || 'Kamida 3 ta belgi bo\'lishi kerak',
-              ]"
-            />
-            <v-text-field
-              v-model="newStudent.phone"
-              label="Telefon raqam"
-              type="number"
-              required
-              maxlength="10"
-              :rules="[
-                (v) => v?.length >= 9 || 'To\'g\'ri kiriting telefon raqamni ',
-              ]"
-            />
-            <v-select
-              v-model="newStudent.subject"
-              :items="subjects"
-              item-text="name"
-              item-value="name"
-              label="Fan"
-              required
-              :rules="[(v) => v?.length >= 2 || 'Fan tanlanmadi']"
-            />
-            <v-select
-              v-model="newStudent.teacher"
-              :items="teachers"
-              item-text="name"
-              item-value="name"
-              label="O'qtuvchi"
-              required
-              outlined
-              :rules="[(v) => v?.length >= 2 || 'O\'qtuvchi tanlanmadi']"
-            />
-            <v-text-field
-              v-model="newStudent.payment"
-              label="To'lov summasi"
-              type="number"
-              required
-            />
-            <v-text-field
-              v-model="newStudent.date"
-              label="Kelgan sanasi"
-              type="date"
-              required
-              :rules="[(v) => v?.length >= 2 || 'Sana kiritilmadi ']"
-            />
-          </v-form>
-        </v-card-text>
-        <v-card-actions>
+      <div class="d-flex flex-column flex-md-row justify-space-between align-center">
+        <div class="header-content">
+          <h1 class="text-h3 font-weight-bold text-white mb-2">O'quvchilar ma'lumotlari</h1>
+          <p class="text-subtitle-1 text-white">Ta'lim markazidagi o'quvchilar ro'yxati</p>
+        </div>
+        <div class="d-flex flex-column flex-md-row mt-4 mt-md-0">
           <v-btn
-            color="blue"
+            color="success"
+            elevation="2"
+            class="px-4 white--text"
+            prepend-icon="mdi-account-plus"
+            @click="openAddModal"
+          >
+            O'quvchi qo'shish
+          </v-btn>
+          <v-btn
+            color="amber"
+            elevation="2"
+            class="mt-3 mt-md-0 ml-md-4 px-4"
+            prepend-icon="mdi-file-excel"
+            @click="exportToExcel"
+          >
+            Excel yuklash
+          </v-btn>
+        </div>
+      </div>
+    </v-sheet>
+
+    <!-- Search and Filter Panel -->
+    <v-card class="mb-6 " elevation="2">
+      <v-card-text>
+        <v-row align="center">
+          <v-col cols="12" md="6">
+            <v-text-field
+              v-model="search"
+              label="Ism yoki familiya bo'yicha qidirish"
+              prepend-inner-icon="mdi-magnify"
+              clearable
+              filled
+              dense
+              hide-details
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" md="6" v-if="!Admin">
+            <v-select
+              v-model="selectedSubject"
+              :items="subjects"
+              label="Fan bo'yicha filterlash"
+              prepend-inner-icon="mdi-book-open-variant"
+              filled
+              dense
+              hide-details
+              clearable
+            ></v-select>
+          </v-col>
+        </v-row>
+      </v-card-text>
+    </v-card>
+
+    <!-- Students Data Table -->
+    <v-card class="rounded-lg" elevation="3">
+      <v-card-title class="subtitle-1 font-weight-bold">
+        <v-icon left color="primary">mdi-account-group</v-icon>
+        O'quvchilar ro'yxati
+        <v-chip class="ml-2" color="primary" small>{{ filteredStudents.length }} ta</v-chip>
+      </v-card-title>
+      
+      <v-data-table
+        :headers="headers"
+        :items="filteredStudents"
+        :items-per-page="10"
+        class="elevation-0"
+        :footer-props="{
+          'items-per-page-options': [5, 10, 15, 20],
+          'items-per-page-text': 'Sahifada:',
+        }"
+      >
+        <!-- Index column -->
+        <template v-slot:item.index="{ index }">
+          <v-chip small color="primary" text-color="white" class="font-weight-medium">
+            {{ index + 1 }}
+          </v-chip>
+        </template>
+        
+        <!-- Name column with first letter capitalized -->
+        <template v-slot:item.name="{ item }">
+          <span class="font-weight-medium">{{ item.name }}</span>
+        </template>
+
+        <!-- Teacher column -->
+        <template v-slot:item.teacher="{ item }">
+          <div class="d-flex align-center">
+            <v-avatar size="30" color="primary" class="mr-2">
+              <span class="white--text">{{ getInitials(item.teacher.name) }}</span>
+            </v-avatar>
+            {{ item.teacher.name }}
+          </div>
+        </template>
+
+        <!-- Subject column -->
+        <template v-slot:item.subject="{ item }">
+          <v-chip small :color="getSubjectColor(item.subject)" text-color="white">
+            {{ item.subject }}
+          </v-chip>
+        </template>
+
+        <!-- Payment column -->
+        <template v-slot:item.payment="{ item }">
+          <span class="font-weight-bold">{{ formatCurrency(item.payment) }}</span>
+        </template>
+
+        <!-- Actions column -->
+        <template v-slot:item.actions="{ item }">
+          <div class="d-flex">
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  fab
+                  x-small
+                  color="info"
+                  class="mr-2"
+                  v-bind="attrs"
+                  v-on="on"
+                  @click="editStudent(item)"
+                >
+                  <v-icon>mdi-pencil</v-icon>
+                </v-btn>
+              </template>
+              <span>Tahrirlash</span>
+            </v-tooltip>
+            
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  fab
+                  x-small
+                  color="error"
+                  v-bind="attrs"
+                  v-on="on"
+                  @click="confirmDelete(item)"
+                >
+                  <v-icon>mdi-delete</v-icon>
+                </v-btn>
+              </template>
+              <span>O'chirish</span>
+            </v-tooltip>
+          </div>
+        </template>
+
+        <!-- Empty state -->
+        <template v-slot:no-data>
+          <div class="pa-6 text-center">
+            <v-img
+              alt="No students found"
+              max-height="150"
+              contain
+              class="mx-auto mb-4"
+            ></v-img>
+            <h3 class="text-subtitle-1 font-weight-medium grey--text">O'quvchilar topilmadi</h3>
+            <v-btn color="primary" class="mt-3" @click="openAddModal">
+              O'quvchi qo'shish
+            </v-btn>
+          </div>
+        </template>
+      </v-data-table>
+    </v-card>
+
+    <!-- Add Student Modal with improved UI -->
+    <v-dialog v-model="addModal" max-width="600px" persistent>
+      <v-card class="rounded-lg">
+        <v-card-title class="primary white--text">
+          <v-icon left color="white">mdi-account-plus</v-icon>
+          Yangi o'quvchi qo'shish
+        </v-card-title>
+        
+        <v-card-text class="pt-6">
+          <v-form ref="addForm">
+            <v-row>
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  v-model="newStudent.name"
+                  label="Ism"
+                  prepend-icon="mdi-account"
+                  outlined
+                  :rules="[(v) => v?.length >= 3 || 'Kamida 3 ta belgi bo\'lishi kerak']"
+                ></v-text-field>
+              </v-col>
+              
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  v-model="newStudent.surname"
+                  label="Familya"
+                  prepend-icon="mdi-account-details"
+                  outlined
+                  :rules="[(v) => v?.length >= 3 || 'Kamida 3 ta belgi bo\'lishi kerak']"
+                ></v-text-field>
+              </v-col>
+              
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  v-model="newStudent.phone"
+                  label="Telefon raqam"
+                  prepend-icon="mdi-phone"
+                  outlined
+                  type="number"
+                  :rules="[(v) => v?.length >= 9 || 'To\'g\'ri kiriting telefon raqamni']"
+                ></v-text-field>
+              </v-col>
+              
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  v-model="newStudent.payment"
+                  label="To'lov summasi"
+                  prepend-icon="mdi-cash"
+                  outlined
+                  type="number"
+                  suffix="so'm"
+                ></v-text-field>
+              </v-col>
+              
+              <v-col cols="12" sm="6">
+                <v-select
+                  v-model="newStudent.subject"
+                  :items="subjects"
+                  label="Fan"
+                  prepend-icon="mdi-book"
+                  outlined
+                  :rules="[(v) => v?.length >= 2 || 'Fan tanlanmadi']"
+                ></v-select>
+              </v-col>
+              
+              <v-col cols="12" sm="6">
+                <v-select
+                  v-model="newStudent.teacher"
+                  :items="teachers"
+                  label="O'qtuvchi"
+                  prepend-icon="mdi-account-tie"
+                  outlined
+                  :rules="[(v) => v?.length >= 2 || 'O\'qtuvchi tanlanmadi']"
+                ></v-select>
+              </v-col>
+              
+              <v-col cols="12">
+                <v-menu
+                  ref="dateMenu"
+                  v-model="dateMenu"
+                  :close-on-content-click="false"
+                  transition="scale-transition"
+                  min-width="auto"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-text-field
+                      v-model="newStudent.date"
+                      label="Kelgan sanasi"
+                      prepend-icon="mdi-calendar"
+                      readonly
+                      outlined
+                      v-bind="attrs"
+                      v-on="on"
+                      :rules="[(v) => v?.length >= 2 || 'Sana kiritilmadi']"
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker
+                    v-model="newStudent.date"
+                    color="primary"
+                    @input="dateMenu = false"
+                  ></v-date-picker>
+                </v-menu>
+              </v-col>
+            </v-row>
+          </v-form>
+        </v-card-text>
+        
+        <v-divider></v-divider>
+        
+        <v-card-actions class="pa-4">
+          <v-spacer></v-spacer>
+          <v-btn
+            text
+            color="grey darken-1"
+            @click="addModal = false"
+          >
+            Bekor qilish
+          </v-btn>
+          <v-btn
+            color="success"
             :disabled="!newStudent.name || newStudent.name.length < 3"
             @click="addStudent"
-            >Qo'shish</v-btn
           >
-          <v-btn color="red" @click="addModal = false">Bekor qilish</v-btn>
+            <v-icon left>mdi-content-save</v-icon>
+            Qo'shish
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <!-- *** -->
+
+    <!-- Edit Student Modal -->
+    <v-dialog v-model="editModal" max-width="600px" persistent>
+      <v-card class="rounded-lg">
+        <v-card-title class="info white--text">
+          <v-icon left color="white">mdi-account-edit</v-icon>
+          O'quvchi ma'lumotlarini tahrirlash
+        </v-card-title>
+        
+        <v-card-text class="pt-6">
+          <v-form ref="editForm">
+            <v-row>
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  v-model="editedStudent.name"
+                  label="Ism"
+                  prepend-icon="mdi-account"
+                  outlined
+                  :rules="[(v) => v?.length >= 3 || 'Kamida 3 ta belgi bo\'lishi kerak']"
+                ></v-text-field>
+              </v-col>
+              
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  v-model="editedStudent.surname"
+                  label="Familya"
+                  prepend-icon="mdi-account-details"
+                  outlined
+                  :rules="[(v) => v?.length >= 3 || 'Kamida 3 ta belgi bo\'lishi kerak']"
+                ></v-text-field>
+              </v-col>
+              
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  v-model="editedStudent.phone"
+                  label="Telefon raqam"
+                  prepend-icon="mdi-phone"
+                  outlined
+                  type="number"
+                  :rules="[(v) => v?.length >= 9 || 'To\'g\'ri kiriting telefon raqamni']"
+                ></v-text-field>
+              </v-col>
+              
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  v-model="editedStudent.payment"
+                  label="To'lov summasi"
+                  prepend-icon="mdi-cash"
+                  outlined
+                  type="number"
+                  suffix="so'm"
+                ></v-text-field>
+              </v-col>
+              
+              <v-col cols="12" sm="6">
+                <v-select
+                  v-model="editedStudent.subject"
+                  :items="subjects"
+                  label="Fan"
+                  prepend-icon="mdi-book"
+                  outlined
+                ></v-select>
+              </v-col>
+              
+              <v-col cols="12" sm="6">
+                <v-select
+                  v-model="editedStudent.teacher"
+                  :items="teachers"
+                  label="O'qtuvchi"
+                  prepend-icon="mdi-account-tie"
+                  outlined
+                ></v-select>
+              </v-col>
+              
+              <v-col cols="12">
+                <v-menu
+                  ref="editDateMenu"
+                  v-model="editDateMenu"
+                  :close-on-content-click="false"
+                  transition="scale-transition"
+                  min-width="auto"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-text-field
+                      v-model="editedStudent.date"
+                      label="Kelgan sanasi"
+                      prepend-icon="mdi-calendar"
+                      readonly
+                      outlined
+                      v-bind="attrs"
+                      v-on="on"
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker
+                    v-model="editedStudent.date"
+                    color="primary"
+                    @input="editDateMenu = false"
+                  ></v-date-picker>
+                </v-menu>
+              </v-col>
+            </v-row>
+          </v-form>
+        </v-card-text>
+        
+        <v-divider></v-divider>
+        
+        <v-card-actions class="pa-4">
+          <v-spacer></v-spacer>
+          <v-btn
+            text
+            color="grey darken-1"
+            @click="editModal = false"
+          >
+            Bekor qilish
+          </v-btn>
+          <v-btn
+            color="info"
+            @click="updateStudent"
+          >
+            <v-icon left>mdi-content-save</v-icon>
+            Saqlash
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <!-- Delete Confirmation Dialog -->
+    <v-dialog v-model="deleteDialog" max-width="420px">
+      <v-card class="rounded-lg">
+        <v-card-title class="error white--text">
+          <v-icon left color="white">mdi-alert</v-icon>
+          O'quvchini o'chirish
+        </v-card-title>
+        
+        <v-card-text class="pt-4 text-center">
+          <v-icon color="error" size="64" class="mb-4">mdi-delete-forever</v-icon>
+          <h3 class="text-h6 mb-2">{{ studentToDelete ? studentToDelete.name + ' ' + studentToDelete.surname : '' }}</h3>
+          <p class="text-body-1">Bu o'quvchi ma'lumotlarini o'chirishni istaysizmi?</p>
+          <p class="text-caption error--text mt-2">Bu amalni qaytarib bo'lmaydi!</p>
+        </v-card-text>
+        
+        <v-divider></v-divider>
+        
+        <v-card-actions class="pa-4">
+          <v-spacer></v-spacer>
+          <v-btn
+            text
+            color="grey darken-1"
+            @click="deleteDialog = false"
+          >
+            Bekor qilish
+          </v-btn>
+          <v-btn
+            color="error"
+            @click="confirmDeleteStudent"
+          >
+            <v-icon left>mdi-delete</v-icon>
+            O'chirish
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -216,17 +485,18 @@ export default {
   data() {
     return {
       search: "",
+      selectedSubject: null,
       currentUser: null, // Current logged-in teacher username
       headers: [
-        { text: "No", value: "index", sortable: false },
-        { text: "Surname", value: "surname", class: "text-uppercase" },
-        { text: "Name", value: "name" },
-        { text: "Teacher", value: "teacher.name" },
-        { text: "Subject", value: "subject" },
-        { text: "Date", value: "date" },
-        { text: "Phone", value: "phone" },
-        { text: "Payment", value: "payment" },
-        { text: "Actions", value: "actions", sortable: false },
+        { text: "№", value: "index", sortable: false, width: "70px" },
+        { text: "Familya", value: "surname", class: "text-uppercase" },
+        { text: "Ism", value: "name" },
+        { text: "O'qituvchi", value: "teacher.name" },
+        { text: "Fan", value: "subject" },
+        { text: "Sana", value: "date" },
+        { text: "Telefon", value: "phone" },
+        { text: "To'lov", value: "payment" },
+        { text: "Amallar", value: "actions", sortable: false, width: "120px" },
       ],
       students: [],
       subjects: [], // To hold subjects from Firebase
@@ -238,7 +508,7 @@ export default {
         subject: "",
         teacher: "",
         payment: "",
-        date: "",
+        date: new Date().toISOString().substr(0, 10),
       },
       editedStudent: {
         name: "",
@@ -249,32 +519,51 @@ export default {
         payment: "",
         date: "",
       },
+      studentToDelete: null,
       addModal: false,
       editModal: false,
+      deleteDialog: false,
+      dateMenu: false,
+      editDateMenu: false,
+      subjectColors: {
+        "Matematika": "indigo",
+        "Fizika": "blue",
+        "Ingliz tili": "deep-purple",
+        "Kimyo": "green",
+        "Biologiya": "teal",
+        "Tarix": "brown",
+        "Adabiyot": "amber darken-3",
+        "Informatika": "cyan darken-2"
+      },
     };
   },
   computed: {
     filteredStudents() {
-      if (this.role === "admin") {
-        return this.students.filter(
-          (student) =>
-            student.name.toLowerCase().includes(this.search.toLowerCase()) ||
-            student.surname.toLowerCase().includes(this.search.toLowerCase())
+      let filtered = this.students;
+      
+      // Filter by search term
+      if (this.search) {
+        const searchLower = this.search.toLowerCase();
+        filtered = filtered.filter(student => 
+          student.name.toLowerCase().includes(searchLower) || 
+          student.surname.toLowerCase().includes(searchLower)
         );
-      } else {
-        return this.students
-          .filter((student) =>
-            student.teacher && student.teacher.name
-              ? student.teacher.name === this.currentUser
-              : false
-          )
-          .filter(
-            (student) =>
-              student.name.toLowerCase().includes(this.search.toLowerCase()) ||
-              student.surname.toLowerCase().includes(this.search.toLowerCase())
-          );
       }
-    },
+      
+      // Filter by subject
+      if (this.selectedSubject) {
+        filtered = filtered.filter(student => student.subject === this.selectedSubject);
+      }
+      
+      // Filter by teacher if not admin
+      if (this.role !== "admin") {
+        filtered = filtered.filter(student => 
+          student.teacher && student.teacher.name === this.currentUser
+        );
+      }
+      
+      return filtered;
+    }
   },
   async created() {
     // Fetch current teacher's name and students on creation
@@ -288,6 +577,22 @@ export default {
     }
   },
   methods: {
+    // Get initials from name
+    getInitials(name) {
+      return name ? name.split(' ').map(n => n[0]).join('').toUpperCase() : '?';
+    },
+    
+    // Format currency with thousand separators
+    formatCurrency(value) {
+      if (!value) return '0';
+      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " so'm";
+    },
+    
+    // Get subject color
+    getSubjectColor(subject) {
+      return this.subjectColors[subject] || "blue-grey";
+    },
+    
     // Fetch students data from Firebase
     async loadStudents() {
       try {
@@ -298,26 +603,32 @@ export default {
         }));
       } catch (error) {
         console.error("Error loading students:", error);
+        this.showNotification("O'quvchilar ma'lumotlarini yuklashda xatolik", "error");
       }
     },
+    
     // Fetch subjects data from Firebase
     async loadSubjects() {
       try {
         const querySnapshot = await getDocs(collection(db, "subjects"));
-        this.subjects = querySnapshot.docs.map((doc) => doc.data().name); // Saqlash faqat `name` stringini
+        this.subjects = querySnapshot.docs.map((doc) => doc.data().name);
       } catch (error) {
-        console.error("Error loading teachers:", error);
+        console.error("Error loading subjects:", error);
+        this.showNotification("Fanlar ro'yxatini yuklashda xatolik", "error");
       }
     },
+    
     // Fetch teachers data from Firebase
     async loadTeachers() {
       try {
         const querySnapshot = await getDocs(collection(db, "teachers"));
-        this.teachers = querySnapshot.docs.map((doc) => doc.data().name); // Saqlash faqat `name` stringini
+        this.teachers = querySnapshot.docs.map((doc) => doc.data().name);
       } catch (error) {
         console.error("Error loading teachers:", error);
+        this.showNotification("O'qituvchilar ro'yxatini yuklashda xatolik", "error");
       }
     },
+    
     // Open Add Student Modal
     openAddModal() {
       this.newStudent = {
@@ -327,125 +638,168 @@ export default {
         subject: "",
         teacher: "",
         payment: "",
+        date: new Date().toISOString().substr(0, 10),
       }; // Reset the form
       this.addModal = true; // Open the modal
     },
+    
     // Add new student to Firebase
     async addStudent() {
       try {
-        // Agar payments maydoni mavjud bo'lmasa, uni yaratish
-        const payments = Array(12).fill(false); // 12 ta false qiymatli massiv
+        // Create payments array with 12 false values
+        const payments = Array(12).fill(false);
 
-        // Yangi o'quvchini Firestore'ga qo'shish
+        // Add new student to Firestore
         const docRef = await addDoc(collection(db, "students"), {
           ...this.newStudent,
           subject: this.newStudent.subject,
           teacher: { name: this.newStudent.teacher },
-          payments: payments, // payments maydonini qo'shish
+          payments: payments,
         });
 
-        // Yangi o'quvchini ro'yxatga qo'shish
+        // Add new student to local array
         this.students.push({
           ...this.newStudent,
           id: docRef.id,
-          payments: payments, // payments ma'lumotini ham qo'shish
+          teacher: { name: this.newStudent.teacher },
+          payments: payments,
         });
 
-        // Toast notification ko'rsatish
-        Toastify({
-          text: "O'quvchi qo'shildi",
-          backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
-          className: "info",
-        }).showToast();
+        // Show success notification
+        this.showNotification("O'quvchi muvaffaqiyatli qo'shildi", "success");
 
-        // Modalni yopish
-        this.addModal = false; // Close the modal
+        // Close the modal
+        this.addModal = false;
       } catch (error) {
         console.error("Error adding student:", error);
-
-        // Xato haqida notification ko'rsatish
-        Toastify({
-          text: "O'quvchi qo'shishda xato bor",
-          backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc3a0)",
-          className: "error",
-        }).showToast();
+        this.showNotification("O'quvchi qo'shishda xatolik yuz berdi", "error");
       }
     },
-    // Delete a student from Firebase
-    async deleteStudent(student) {
+    
+    // Confirm delete student
+    confirmDelete(student) {
+      this.studentToDelete = student;
+      this.deleteDialog = true;
+    },
+    
+    // Delete confirmed student
+    async confirmDeleteStudent() {
+      if (!this.studentToDelete) return;
+      
       try {
-        await deleteDoc(doc(db, "students", student.id));
+        await deleteDoc(doc(db, "students", this.studentToDelete.id));
 
-        const index = this.students.indexOf(student);
+        // Remove student from local array
+        const index = this.students.findIndex(s => s.id === this.studentToDelete.id);
         if (index > -1) {
           this.students.splice(index, 1);
         }
 
-        Toastify({
-          text: "O'quvchi o'chirildi ",
-          backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc3a0)",
-          className: "error",
-        }).showToast();
+        // Show success notification
+        this.showNotification("O'quvchi muvaffaqiyatli o'chirildi", "error");
+        
+        // Close dialog
+        this.deleteDialog = false;
+        this.studentToDelete = null;
       } catch (error) {
         console.error("Error deleting student:", error);
-        Toastify({
-          text: "Error deleting student",
-          backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc3a0)",
-          className: "error",
-        }).showToast();
+        this.showNotification("O'quvchi o'chirishda xatolik yuz berdi", "error");
       }
     },
+    
     // Open Edit Student Modal
     editStudent(student) {
-      this.editedStudent = { ...student };
-      this.editModal = true; // Open the edit modal
+      this.editedStudent = { 
+        ...student,
+        teacher: student.teacher ? student.teacher.name : '',
+      };
+      this.editModal = true;
     },
+    
     // Update student details in Firebase
     async updateStudent() {
       try {
         const studentRef = doc(db, "students", this.editedStudent.id);
-        await updateDoc(studentRef, {
+        
+        // Prepare update object
+        const updateData = {
           name: this.editedStudent.name,
           surname: this.editedStudent.surname,
           phone: this.editedStudent.phone,
           subject: this.editedStudent.subject,
-          teacher: this.editedStudent.teacher,
           teacher: { name: this.editedStudent.teacher },
           payment: this.editedStudent.payment,
           date: this.editedStudent.date,
-        });
+        };
+        
+        // Update in Firebase
+        await updateDoc(studentRef, updateData);
 
-        // Update student in the local array
-        const index = this.students.findIndex(
-          (student) => student.id === this.editedStudent.id
-        );
+        // Update student in local array
+        const index = this.students.findIndex(s => s.id === this.editedStudent.id);
         if (index !== -1) {
-          this.students[index] = { ...this.editedStudent };
+          this.students[index] = { 
+            ...this.editedStudent,
+            teacher: { name: this.editedStudent.teacher }
+          };
         }
 
-        Toastify({
-          text: "Muvofaqiyatli yangilandi ",
-          backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
-          className: "info",
-        }).showToast();
+        // Show success notification
+        this.showNotification("O'quvchi ma'lumotlari muvaffaqiyatli yangilandi", "success");
 
-        this.editModal = false; // Close the modal
+        // Close modal
+        this.editModal = false;
       } catch (error) {
         console.error("Error updating student:", error);
-        Toastify({
-          text: "Error updating student",
-          backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc3a0)",
-          className: "error",
-        }).showToast();
+        this.showNotification("O'quvchi ma'lumotlarini yangilashda xatolik", "error");
       }
     },
+    
     // Export student data to Excel
     exportToExcel() {
-      const ws = XLSX.utils.json_to_sheet(this.filteredStudents);
-      const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, "Students");
-      XLSX.writeFile(wb, "students.xlsx");
+      try {
+        // Prepare data for export - remove complex objects and ID
+        const exportData = this.filteredStudents.map((student, index) => ({
+          '№': index + 1,
+          'Ism': student.name,
+          'Familya': student.surname,
+          'Fan': student.subject,
+          'O\'qituvchi': student.teacher ? student.teacher.name : '',
+          'Sana': student.date,
+          'Telefon': student.phone,
+          'To\'lov': student.payment
+        }));
+        
+        const ws = XLSX.utils.json_to_sheet(exportData);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "O'quvchilar");
+        XLSX.writeFile(wb, "o'quvchilar_ro'yxati.xlsx");
+        
+        this.showNotification("Excel fayli muvaffaqiyatli yuklandi", "success");
+      } catch (error) {
+        console.error("Error exporting to Excel:", error);
+        this.showNotification("Excel faylini yuklashda xatolik", "error");
+      }
     },
+    
+    // Show notification using Toastify
+    showNotification(message, type = "success") {
+      const bgColors = {
+        success: "linear-gradient(to right, #00b09b, #96c93d)",
+        error: "linear-gradient(to right, #ff5f6d, #ffc3a0)",
+        info: "linear-gradient(to right, #2193b0, #6dd5ed)"
+      };
+      
+      Toastify({
+        text: message,
+        duration: 3000,
+        backgroundColor: bgColors[type],
+        className: type,
+        position: "right",
+        gravity: "top",
+        close: true,
+      }).showToast();
+    }
   },
   async mounted() {
     await this.loadStudents();
@@ -454,20 +808,42 @@ export default {
   },
 };
 </script>
+
 <style>
-@media (max-width: 400px) {
-  .title-student {
-    text-align: center;
+.header-banner {
+  /* background-image: linear-gradient(135deg, #6365f191 0%, #8a5cf685 10%); */
+  position: relative;
+  overflow: hidden;
+}
+
+.header-banner::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  bottom: -50%;
+  left: -50%;
+  transform: rotate(25deg);
+}
+
+.student-dashboard .v-data-table th {
+  font-weight: bold !important;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.student-dashboard .v-data-table tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+@media (max-width: 600px) {
+  .header-banner {
+    height: auto !important;
+    padding: 1.5rem !important;
   }
-  .text-end {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    margin: 0 auto;
-  }
-  .left-btn {
-    margin: 10px 0 !important;
+  
+  .text-h3 {
+    font-size: 1.5rem !important;
   }
 }
 </style>

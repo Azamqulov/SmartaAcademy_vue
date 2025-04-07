@@ -13,7 +13,7 @@
                 class="ml-8"
               ></v-img>
             </router-link>
-            <v-list-item-title class="text-h5 pb-3 mt-4">Smart Academy</v-list-item-title>
+            <v-list-item-title class="text-h5 pb-3 mt-4 font-bold">Smart Academy</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
         <v-divider class="mt--20" style="margin-top: 30px"></v-divider>
@@ -58,16 +58,15 @@
     <!-- Navbar -->
     <v-app-bar app>
       <v-btn @click="toggleTheme">
-        <v-icon>{{
+        <v-icon color="blue">{{
           currentTheme === "dark"
             ? "mdi-white-balance-sunny"
             : "mdi-moon-waning-crescent"
         }}</v-icon>
       </v-btn>
-
       <!-- Profile Section -->
       <v-spacer></v-spacer>
-      <v-avatar color="primary" class=" rounded-full mr-4">
+      <v-avatar color="blue" class=" rounded-full mr-4">
          <router-link to="/main/dashboard">
           <v-btn text color="surface">{{ profileInitial }}</v-btn>
         </router-link>
