@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+template {
+    font-family: "Fira Code" !important;
+    font-weight: 400;
+}

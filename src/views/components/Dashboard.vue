@@ -380,6 +380,10 @@ export default {
 </script>
 
 <style scoped>
+*{
+  font-family: "Fira Code" !important;
+    font-weight: 400;
+}
 /* Custom Styles */
 .avatar-main {
   margin: 0 auto;
