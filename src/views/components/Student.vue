@@ -1,31 +1,31 @@
 <template>
-  <v-container fluid class="student-dashboard pa-0">
-    <!-- Dashboard Header with Gradient Background -->
+  <v-container fluid  >
+    <!-- Dashboard Header with Blue Background -->
     <v-sheet
-      class="header-banner mb-6 pa-6  d-flex flex-column justify-center"
+      class="header-banner mb-6 pa-6 d-flex flex-column justify-center"
       color="blue"
-      elevation="4"
-      height="180"
+      elevation="2"
+      height="160"
     >
       <div class="d-flex flex-column flex-md-row justify-space-between align-center">
         <div class="header-content">
-          <h1 class="text-h3 font-weight-bold text-white mb-2">O'quvchilar ma'lumotlari</h1>
-          <p class="text-subtitle-1 text-white">Ta'lim markazidagi o'quvchilar ro'yxati</p>
+          <h1 class="text-h3 font-weight-bold white--text mb-2">O'quvchilar ma'lumotlari</h1>
+          <p class="text-subtitle-1 white--text">Ta'lim markazidagi o'quvchilar ro'yxati</p>
         </div>
         <div class="d-flex flex-column flex-md-row mt-4 mt-md-0">
           <v-btn
-            color="success"
-            elevation="2"
-            class="px-4 white--text"
+            color="white"
+            elevation="1"
+            class="px-4 primary--text"
             prepend-icon="mdi-account-plus"
             @click="openAddModal"
           >
             O'quvchi qo'shish
           </v-btn>
           <v-btn
-            color="amber"
-            elevation="2"
-            class="mt-3 mt-md-0 ml-md-4 px-4"
+            color="blue-lighten-1"
+            elevation="1"
+            class="mt-3 mt-md-0 ml-md-4 px-4 white--text"
             prepend-icon="mdi-file-excel"
             @click="exportToExcel"
           >
@@ -36,7 +36,7 @@
     </v-sheet>
 
     <!-- Search and Filter Panel -->
-    <v-card class="mb-6 " elevation="2">
+    <v-card class="mb-6 rounded-lg" elevation="1">
       <v-card-text>
         <v-row align="center">
           <v-col cols="12" md="6">
@@ -48,9 +48,10 @@
               filled
               dense
               hide-details
+              color="primary"
             ></v-text-field>
           </v-col>
-          <v-col cols="12" md="6" v-if="!Admin">
+          <v-col cols="12" md="6" v-if="!isAdmin">
             <v-select
               v-model="selectedSubject"
               :items="subjects"
@@ -60,6 +61,7 @@
               dense
               hide-details
               clearable
+              color="primary"
             ></v-select>
           </v-col>
         </v-row>
@@ -67,11 +69,11 @@
     </v-card>
 
     <!-- Students Data Table -->
-    <v-card class="rounded-lg" elevation="3">
+    <v-card class="rounded-xl" elevation="2">
       <v-card-title class="subtitle-1 font-weight-bold">
-        <v-icon left color="primary">mdi-account-group</v-icon>
+        <v-icon left color="blue">mdi-account-group</v-icon>
         O'quvchilar ro'yxati
-        <v-chip class="ml-2" color="primary" small>{{ filteredStudents.length }} ta</v-chip>
+        <v-chip class="ml-2" color="blue" small outlined>{{ filteredStudents.length }} ta</v-chip>
       </v-card-title>
       
       <v-data-table
@@ -108,7 +110,7 @@
 
         <!-- Subject column -->
         <template v-slot:item.subject="{ item }">
-          <v-chip small :color="getSubjectColor(item.subject)" text-color="white">
+          <v-chip small color="blue" text-color="white">
             {{ item.subject }}
           </v-chip>
         </template>
@@ -126,7 +128,7 @@
                 <v-btn
                   fab
                   x-small
-                  color="info"
+                  color="primary"
                   class="mr-2"
                   v-bind="attrs"
                   v-on="on"
@@ -143,7 +145,7 @@
                 <v-btn
                   fab
                   x-small
-                  color="error"
+                  color="blue-lighten-1"
                   v-bind="attrs"
                   v-on="on"
                   @click="confirmDelete(item)"
@@ -159,12 +161,6 @@
         <!-- Empty state -->
         <template v-slot:no-data>
           <div class="pa-6 text-center">
-            <v-img
-              alt="No students found"
-              max-height="150"
-              contain
-              class="mx-auto mb-4"
-            ></v-img>
             <h3 class="text-subtitle-1 font-weight-medium grey--text">O'quvchilar topilmadi</h3>
             <v-btn color="primary" class="mt-3" @click="openAddModal">
               O'quvchi qo'shish
@@ -191,6 +187,7 @@
                   label="Ism"
                   prepend-icon="mdi-account"
                   outlined
+                  color="primary"
                   :rules="[(v) => v?.length >= 3 || 'Kamida 3 ta belgi bo\'lishi kerak']"
                 ></v-text-field>
               </v-col>
@@ -201,6 +198,7 @@
                   label="Familya"
                   prepend-icon="mdi-account-details"
                   outlined
+                  color="primary"
                   :rules="[(v) => v?.length >= 3 || 'Kamida 3 ta belgi bo\'lishi kerak']"
                 ></v-text-field>
               </v-col>
@@ -212,6 +210,7 @@
                   prepend-icon="mdi-phone"
                   outlined
                   type="number"
+                  color="primary"
                   :rules="[(v) => v?.length >= 9 || 'To\'g\'ri kiriting telefon raqamni']"
                 ></v-text-field>
               </v-col>
@@ -224,6 +223,7 @@
                   outlined
                   type="number"
                   suffix="so'm"
+                  color="primary"
                 ></v-text-field>
               </v-col>
               
@@ -234,7 +234,8 @@
                   label="Fan"
                   prepend-icon="mdi-book"
                   outlined
-                  :rules="[(v) => v?.length >= 2 || 'Fan tanlanmadi']"
+                  color="primary"
+                  :rules="[(v) => !!v || 'Fan tanlanmadi']"
                 ></v-select>
               </v-col>
               
@@ -245,7 +246,8 @@
                   label="O'qtuvchi"
                   prepend-icon="mdi-account-tie"
                   outlined
-                  :rules="[(v) => v?.length >= 2 || 'O\'qtuvchi tanlanmadi']"
+                  color="primary"
+                  :rules="[(v) => !!v || 'O\'qtuvchi tanlanmadi']"
                 ></v-select>
               </v-col>
               
@@ -264,9 +266,10 @@
                       prepend-icon="mdi-calendar"
                       readonly
                       outlined
+                      color="primary"
                       v-bind="attrs"
                       v-on="on"
-                      :rules="[(v) => v?.length >= 2 || 'Sana kiritilmadi']"
+                      :rules="[(v) => !!v || 'Sana kiritilmadi']"
                     ></v-text-field>
                   </template>
                   <v-date-picker
@@ -292,7 +295,7 @@
             Bekor qilish
           </v-btn>
           <v-btn
-            color="success"
+            color="primary"
             :disabled="!newStudent.name || newStudent.name.length < 3"
             @click="addStudent"
           >
@@ -306,7 +309,7 @@
     <!-- Edit Student Modal -->
     <v-dialog v-model="editModal" max-width="600px" persistent>
       <v-card class="rounded-lg">
-        <v-card-title class="info white--text">
+        <v-card-title class="primary white--text">
           <v-icon left color="white">mdi-account-edit</v-icon>
           O'quvchi ma'lumotlarini tahrirlash
         </v-card-title>
@@ -320,6 +323,7 @@
                   label="Ism"
                   prepend-icon="mdi-account"
                   outlined
+                  color="primary"
                   :rules="[(v) => v?.length >= 3 || 'Kamida 3 ta belgi bo\'lishi kerak']"
                 ></v-text-field>
               </v-col>
@@ -330,6 +334,7 @@
                   label="Familya"
                   prepend-icon="mdi-account-details"
                   outlined
+                  color="primary"
                   :rules="[(v) => v?.length >= 3 || 'Kamida 3 ta belgi bo\'lishi kerak']"
                 ></v-text-field>
               </v-col>
@@ -341,6 +346,7 @@
                   prepend-icon="mdi-phone"
                   outlined
                   type="number"
+                  color="primary"
                   :rules="[(v) => v?.length >= 9 || 'To\'g\'ri kiriting telefon raqamni']"
                 ></v-text-field>
               </v-col>
@@ -353,6 +359,7 @@
                   outlined
                   type="number"
                   suffix="so'm"
+                  color="primary"
                 ></v-text-field>
               </v-col>
               
@@ -363,6 +370,7 @@
                   label="Fan"
                   prepend-icon="mdi-book"
                   outlined
+                  color="primary"
                 ></v-select>
               </v-col>
               
@@ -373,6 +381,7 @@
                   label="O'qtuvchi"
                   prepend-icon="mdi-account-tie"
                   outlined
+                  color="primary"
                 ></v-select>
               </v-col>
               
@@ -391,6 +400,7 @@
                       prepend-icon="mdi-calendar"
                       readonly
                       outlined
+                      color="primary"
                       v-bind="attrs"
                       v-on="on"
                     ></v-text-field>
@@ -418,7 +428,7 @@
             Bekor qilish
           </v-btn>
           <v-btn
-            color="info"
+            color="primary"
             @click="updateStudent"
           >
             <v-icon left>mdi-content-save</v-icon>
@@ -431,16 +441,16 @@
     <!-- Delete Confirmation Dialog -->
     <v-dialog v-model="deleteDialog" max-width="420px">
       <v-card class="rounded-lg">
-        <v-card-title class="error white--text">
+        <v-card-title class="primary white--text">
           <v-icon left color="white">mdi-alert</v-icon>
           O'quvchini o'chirish
         </v-card-title>
         
         <v-card-text class="pt-4 text-center">
-          <v-icon color="error" size="64" class="mb-4">mdi-delete-forever</v-icon>
+          <v-icon color="blue" size="64" class="mb-4">mdi-delete-forever</v-icon>
           <h3 class="text-h6 mb-2">{{ studentToDelete ? studentToDelete.name + ' ' + studentToDelete.surname : '' }}</h3>
           <p class="text-body-1">Bu o'quvchi ma'lumotlarini o'chirishni istaysizmi?</p>
-          <p class="text-caption error--text mt-2">Bu amalni qaytarib bo'lmaydi!</p>
+          <p class="text-caption primary--text mt-2">Bu amalni qaytarib bo'lmaydi!</p>
         </v-card-text>
         
         <v-divider></v-divider>
@@ -455,7 +465,7 @@
             Bekor qilish
           </v-btn>
           <v-btn
-            color="error"
+            color="primary"
             @click="confirmDeleteStudent"
           >
             <v-icon left>mdi-delete</v-icon>
@@ -469,7 +479,7 @@
 
 <script>
 // Import necessary Firebase modules and xlsx for Excel export
-import { db } from "@/firebaseConfig"; // assuming firebaseConfig.js is set up properly
+import { db } from "@/firebaseConfig";
 import {
   collection,
   getDocs,
@@ -478,15 +488,15 @@ import {
   updateDoc,
   doc,
 } from "firebase/firestore";
-import * as XLSX from "xlsx"; // Importing xlsx library
-import Toastify from "toastify-js"; // Import Toastify
+import * as XLSX from "xlsx";
 
 export default {
   data() {
     return {
       search: "",
       selectedSubject: null,
-      currentUser: null, // Current logged-in teacher username
+      currentUser: null,
+      role: "teacher",
       headers: [
         { text: "№", value: "index", sortable: false, width: "70px" },
         { text: "Familya", value: "surname", class: "text-uppercase" },
@@ -499,8 +509,8 @@ export default {
         { text: "Amallar", value: "actions", sortable: false, width: "120px" },
       ],
       students: [],
-      subjects: [], // To hold subjects from Firebase
-      teachers: [], // To hold teachers from Firebase
+      subjects: [],
+      teachers: [],
       newStudent: {
         name: "",
         surname: "",
@@ -525,19 +535,12 @@ export default {
       deleteDialog: false,
       dateMenu: false,
       editDateMenu: false,
-      subjectColors: {
-        "Matematika": "indigo",
-        "Fizika": "blue",
-        "Ingliz tili": "deep-purple",
-        "Kimyo": "green",
-        "Biologiya": "teal",
-        "Tarix": "brown",
-        "Adabiyot": "amber darken-3",
-        "Informatika": "cyan darken-2"
-      },
     };
   },
   computed: {
+    isAdmin() {
+      return this.role === "admin";
+    },
     filteredStudents() {
       let filtered = this.students;
       
@@ -556,7 +559,7 @@ export default {
       }
       
       // Filter by teacher if not admin
-      if (this.role !== "admin") {
+      if (!this.isAdmin) {
         filtered = filtered.filter(student => 
           student.teacher && student.teacher.name === this.currentUser
         );
@@ -567,8 +570,8 @@ export default {
   },
   async created() {
     // Fetch current teacher's name and students on creation
-    this.currentUser = localStorage.getItem("teacherName"); // Teacher name from localStorage
-    this.role = localStorage.getItem("userRole"); // Get role (admin or teacher)
+    this.currentUser = localStorage.getItem("teacherName");
+    this.role = localStorage.getItem("userRole") || "teacher";
 
     if (this.currentUser) {
       await this.loadStudents();
@@ -586,11 +589,6 @@ export default {
     formatCurrency(value) {
       if (!value) return '0';
       return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " so'm";
-    },
-    
-    // Get subject color
-    getSubjectColor(subject) {
-      return this.subjectColors[subject] || "blue-grey";
     },
     
     // Fetch students data from Firebase
@@ -614,7 +612,6 @@ export default {
         this.subjects = querySnapshot.docs.map((doc) => doc.data().name);
       } catch (error) {
         console.error("Error loading subjects:", error);
-        this.showNotification("Fanlar ro'yxatini yuklashda xatolik", "error");
       }
     },
     
@@ -625,7 +622,6 @@ export default {
         this.teachers = querySnapshot.docs.map((doc) => doc.data().name);
       } catch (error) {
         console.error("Error loading teachers:", error);
-        this.showNotification("O'qituvchilar ro'yxatini yuklashda xatolik", "error");
       }
     },
     
@@ -639,8 +635,8 @@ export default {
         teacher: "",
         payment: "",
         date: new Date().toISOString().substr(0, 10),
-      }; // Reset the form
-      this.addModal = true; // Open the modal
+      };
+      this.addModal = true;
     },
     
     // Add new student to Firebase
@@ -696,7 +692,7 @@ export default {
         }
 
         // Show success notification
-        this.showNotification("O'quvchi muvaffaqiyatli o'chirildi", "error");
+        this.showNotification("O'quvchi muvaffaqiyatli o'chirildi", "info");
         
         // Close dialog
         this.deleteDialog = false;
@@ -782,23 +778,28 @@ export default {
       }
     },
     
-    // Show notification using Toastify
+    // Simple notification using alert (fallback if Toastify is not available)
     showNotification(message, type = "success") {
-      const bgColors = {
-        success: "linear-gradient(to right, #00b09b, #96c93d)",
-        error: "linear-gradient(to right, #ff5f6d, #ffc3a0)",
-        info: "linear-gradient(to right, #2193b0, #6dd5ed)"
-      };
-      
-      Toastify({
-        text: message,
-        duration: 3000,
-        backgroundColor: bgColors[type],
-        className: type,
-        position: "right",
-        gravity: "top",
-        close: true,
-      }).showToast();
+      if (typeof Toastify === 'function') {
+        const bgColors = {
+          success: "linear-gradient(to right, #4CAF50, #2196F3)",
+          error: "linear-gradient(to right, #f44336, #e91e63)",
+          info: "linear-gradient(to right, #2196F3, #03A9F4)"
+        };
+        
+        Toastify({
+          text: message,
+          duration: 3000,
+          backgroundColor: bgColors[type],
+          className: type,
+          position: "right",
+          gravity: "top",
+          close: true,
+        }).showToast();
+      } else {
+        // Fallback to console if Toastify is not available
+        console.log(`${type.toUpperCase()}: ${message}`);
+      }
     }
   },
   async mounted() {
@@ -809,31 +810,29 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.v-container.fluid {
+    max-width: 95% !important;
+}
+.student-dashboard {
+  margin: 20px;
+  padding: 2rem !important;
+}
 .header-banner {
-  /* background-image: linear-gradient(135deg, #6365f191 0%, #8a5cf685 10%); */
+  background: linear-gradient(135deg, #1976d2 0%, #0d47a1 100%);
   position: relative;
   overflow: hidden;
-}
-
-.header-banner::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  bottom: -50%;
-  left: -50%;
-  transform: rotate(25deg);
 }
 
 .student-dashboard .v-data-table th {
   font-weight: bold !important;
   text-transform: uppercase;
   font-size: 0.8rem;
+  color: #1976d2;
 }
 
 .student-dashboard .v-data-table tbody tr:hover {
-  background-color: #f5f5f5;
+  background-color: #f0f7ff;
 }
 
 @media (max-width: 600px) {

@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <div class="page-header mb-6">
       <h1 class="text-center gradient-text">O'quvchilar ro'yxati</h1>
     </div>

@@ -18,6 +18,10 @@
 //
 </script>
 <style>
+*{
+  font-family: "Fira Code" !important;
+    font-weight: 300;
+}
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }

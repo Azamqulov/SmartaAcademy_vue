@@ -72,7 +72,7 @@
       <!-- Profile Section -->
       <v-spacer></v-spacer>
       <v-avatar color="blue" class="rounded-full mr-4">
-        <router-link to="/admin-dashboard/admin">
+        <router-link to="/admin/admin">
           <v-btn text color="surface">{{ profileInitial }}</v-btn>
         </router-link>
       </v-avatar>
@@ -95,27 +95,27 @@ export default {
     return {
       sidebarVisible: true, // Sidebar boshlang‘ich holati
       menuItems: [
-        { title: "Home", icon: "mdi-home", link: "/admin-dashboard/home" },
+        { title: "Home", icon: "mdi-home", link: "/admin/home" },
         {
           title: "Student",
           icon: "mdi-account-circle",
-          link: "/admin-dashboard/student",
+          link: "/admin/student",
         },
         {
           title: "Payment",
           icon: "mdi-credit-card",
-          link: "/admin-dashboard/payment",
+          link: "/admin/payment",
         },
         {
           title: "Teacher",
           icon: "mdi-account",
-          link: "/admin-dashboard/teacher",
+          link: "/admin/teacher",
         },
-        // { title: "Dasboard", icon: "mdi-view-dashboard", link: "/admin-dashboard/dashboard" },
+        // { title: "Dasboard", icon: "mdi-view", link: "/admin/dashboard" },
         {
           title: "Dasboard",
-          icon: "mdi-view-dashboard",
-          link: "/admin-dashboard/admin",
+          icon: "mdi-view",
+          link: "/admin/admin",
         },
       ],
       currentUser: localStorage.getItem("teacherName"), // Get Teacher Name from localStorage

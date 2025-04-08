@@ -13,7 +13,9 @@
                 class="ml-8"
               ></v-img>
             </router-link>
-            <v-list-item-title class="text-h5 pb-3 mt-4 font-bold">Smart Academy</v-list-item-title>
+            <v-list-item-title class="text-h5 pb-3 mt-4 font-weight-bold">
+              Smart Academy</v-list-item-title
+            >
           </v-list-item-content>
         </v-list-item>
         <v-divider class="mt--20" style="margin-top: 30px"></v-divider>
@@ -32,7 +34,8 @@
       </v-list>
       <v-btn
         @click="logout"
-        class="w-full bg-red-700 mx-3 text-white" color="dark"
+        class="w-full bg-red-700 mx-3 text-white"
+        color="dark"
         style="position: absolute; bottom: 10px; background: red; width: 90%"
       >
         <v-icon>mdi-logout</v-icon>
@@ -66,8 +69,8 @@
       </v-btn>
       <!-- Profile Section -->
       <v-spacer></v-spacer>
-      <v-avatar color="blue" class=" rounded-full mr-4">
-         <router-link to="/main/dashboard">
+      <v-avatar color="blue" class="rounded-full mr-4">
+        <router-link to="/main/dashboard">
           <v-btn text color="surface">{{ profileInitial }}</v-btn>
         </router-link>
       </v-avatar>
@@ -76,7 +79,7 @@
     <!-- Main Content -->
     <v-main class="overflow-y-scroll" style="height: 100vh">
       <router-view v-slot="{ Component }">
-        <transition name="fade" mode="out-in">
+        <transition :key="Component.name" name="fade" mode="out-in">
           <component :is="Component" />
         </transition>
       </router-view>
@@ -90,13 +93,13 @@ export default {
     return {
       sidebarVisible: true, // Sidebar initial state
       menuItems: [
-        { title: "Home", icon: "mdi-home", link: "/main/home" },
-        { title: "Student", icon: "mdi-account-circle", link: "/main/student" },
-        { title: "Payment", icon: "mdi-credit-card", link: "/main/payment" },
+        { title: "Home", icon: "mdi-home", link: "/home" },
+        { title: "Student", icon: "mdi-account-circle", link: "/student" },
+        { title: "Payment", icon: "mdi-credit-card", link: "/payment" },
         {
           title: "Dashboard",
           icon: "mdi-view-dashboard",
-          link: "/main/dashboard",
+          link: "/dashboard",
         },
       ],
       currentUser: localStorage.getItem("teacherName"), // Get Teacher Name from localStorage
@@ -124,7 +127,7 @@ export default {
     },
     logout() {
       localStorage.removeItem("userRole");
-      this.$router.push("/"); // Navigate to login page on logout
+      this.$router.push("/Login"); // Navigate to login page on logout
     },
     toggleSidebar() {
       this.sidebarVisible = !this.sidebarVisible; // Toggle sidebar visibility
@@ -142,7 +145,6 @@ export default {
 </script>
 
 <style scoped>
-
 .dark-mode {
   background-color: #203b37; /* Dark background */
   color: #ffffff; /* Light text color */

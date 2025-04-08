@@ -1,7 +1,7 @@
 <template>
-  <v-container>
-      <!-- Dashboard Statistika Kartlari -->
-      <v-row class="mt-6">
+  <v-container fluid>
+    <!-- Dashboard Header -->
+    <v-row class="mt-6">
       <v-col cols="12">
         <div class="dashboard-header">
           <h2 class="dashboard-title">Dashboard</h2>
@@ -9,55 +9,55 @@
         </div>
       </v-col>
     </v-row>
-    <v-row >
-      <!-- Profil Kartasi -->
+    
+    <v-row>
+      <!-- Profile Card -->
       <v-col cols="12" md="6" lg="6">
-        <v-card class="pa-4 m-auto main-blog" outlined>
-          <v-card-title>
-            <v-avatar size="100" class="avatar-main">
+        <v-card class="profile-card pa-4" outlined elevation="2">
+          <v-card-title class="profile-header">
+            <v-avatar size="100" class="avatar-main mb-3">
               <template v-if="teacher.photoURL">
                 <img
-                  width="100% "
-                  style="height: 150px; margin: 0 auto"
-                  class="text-center m-auto"
+                  class="profile-image"
                   :src="teacher.photoURL"
                   alt="Profil rasmi"
                 />
               </template>
               <template v-else>
                 <v-avatar 
-                  style="
-                    height: 150px;
-                    width: 150px;
-                    font-size: 28px;
-                    text-align: center;
-                  "
                   color="blue"
-                  class="white--text text--center m--auto text-3xl"
+                  class="white--text profile-initial"
                 >
                   {{ profileInitial }}
                 </v-avatar>
               </template>
             </v-avatar>
-            <div>
-              <h3 class="">Ism: {{ teacher.name }}</h3>
-              <p><strong>Username:</strong> {{ teacher.username }}</p>
-              <h4 class="grey--text">Fan: {{ teacher.subject }}</h4>
+            <div class="profile-info">
+              <h3 class="profile-name">Ism: {{ teacher.name }}</h3>
+              <p class="profile-username"><strong>Username:</strong> {{ teacher.username }}</p>
+              <h4 class="profile-subject grey--text">Fan: {{ teacher.subject }}</h4>
             </div>
           </v-card-title>
-          <v-card-actions class="all-btn">
-            <v-btn color="blue" @click="openEditModal" class="action-button"> Tahrirlash</v-btn>
-            <v-btn color="red" @click="openLoginEditModal" class="action-button"
-              >Parolni Tahrirlash</v-btn
-            >
+          <v-card-actions class="action-buttons">
+            <v-btn color="blue" @click="openEditModal" class="action-button">
+              <v-icon left>mdi-pencil</v-icon> Tahrirlash
+            </v-btn>
+            <v-btn color="red" @click="openLoginEditModal" class="action-button">
+              <v-icon left>mdi-lock</v-icon> Parolni Tahrirlash
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
   
-      <!-- Daromad Statistikasi -->
+      <!-- Revenue Statistics Card -->
       <v-col cols="12" md="3" sm="6">
-        <v-card class="stats-card revenue-card" elevation="1" @mouseover="animateCard('revenue')" @mouseleave="resetAnimation('revenue')">
-          <div class="stats-icon-container ">
+        <v-card 
+          class="stats-card revenue-card" 
+          elevation="2" 
+          @mouseover="animateCard('revenue')" 
+          @mouseleave="resetAnimation('revenue')"
+        >
+          <div class="stats-icon-container blue lighten-4">
             <v-icon color="blue" size="24">mdi-currency-usd</v-icon>
           </div>
           <div class="stats-content">
@@ -74,14 +74,19 @@
         </v-card>
       </v-col>
 
-       <!-- Mijozlar Statistikasi -->
-       <v-col cols="12" md="3" sm="6">
-        <v-card class="stats-card clients-card" elevation="1" @mouseover="animateCard('clients')" @mouseleave="resetAnimation('clients')">
-          <div class="stats-icon-container bg-light-indigo">
-            <v-icon color="blue" size="24">mdi-account-group-outline</v-icon>
+      <!-- Clients Statistics Card -->
+      <v-col cols="12" md="3" sm="6">
+        <v-card 
+          class="stats-card clients-card" 
+          elevation="2" 
+          @mouseover="animateCard('clients')" 
+          @mouseleave="resetAnimation('clients')"
+        >
+          <div class="stats-icon-container indigo lighten-4">
+            <v-icon color="indigo" size="24">mdi-account-group-outline</v-icon>
           </div>
           <div class="stats-content">
-            <div class="stats-title">Total Client</div>
+            <div class="stats-title">Total Clients</div>
             <div class="stats-value" ref="clientsValue">{{ formatNumber(statsTotals.clients) }}</div>
             <div class="stats-chart">
               <svg class="chart" viewBox="0 0 100 30">
@@ -91,91 +96,117 @@
           </div>
         </v-card>
       </v-col>
-   
-
-     
     </v-row>
 
-    <!-- Admin Paneli bilan birga -->
+    <!-- Admin Panel Cards -->
     <v-row v-if="isAdmin" class="mt-5">
       <v-col cols="12" md="4">
-        <v-card outlined class="admin-stats-card">
-          <v-card-title>Jami O'quvchilar</v-card-title>
-          <v-card-subtitle>{{ totalStudents }}</v-card-subtitle>
+        <v-card outlined elevation="2" class="admin-stats-card">
+          <v-card-title>
+            <v-icon left color="primary">mdi-account-multiple</v-icon>
+            Jami O'quvchilar
+          </v-card-title>
+          <v-card-subtitle class="admin-stat-value">{{ formatNumber(totalStudents) }}</v-card-subtitle>
         </v-card>
       </v-col>
+      
       <v-col cols="12" md="4">
-        <v-card outlined class="admin-stats-card">
-          <v-card-title>Jami To'lovlar</v-card-title>
-          <v-card-subtitle>{{ totalPayments }} so'm</v-card-subtitle>
+        <v-card outlined elevation="2" class="admin-stats-card">
+          <v-card-title>
+            <v-icon left color="success">mdi-cash-multiple</v-icon>
+            Jami To'lovlar
+          </v-card-title>
+          <v-card-subtitle class="admin-stat-value">{{ formatNumber(totalPayments) }} so'm</v-card-subtitle>
         </v-card>
       </v-col>
+      
       <v-col cols="12" md="4">
-        <v-card outlined class="admin-stats-card">
-          <v-card-title>Jami O'tganlar</v-card-title>
-          <v-card-subtitle>{{ totalPass }}</v-card-subtitle>
+        <v-card outlined elevation="2" class="admin-stats-card">
+          <v-card-title>
+            <v-icon left color="info">mdi-check-circle</v-icon>
+            Jami O'tganlar
+          </v-card-title>
+          <v-card-subtitle class="admin-stat-value">{{ formatNumber(totalPass) }}</v-card-subtitle>
         </v-card>
       </v-col>
     </v-row>
 
-    <!-- Tahrirlash Modal -->
+    <!-- Edit Profile Modal -->
     <v-dialog v-model="editModal" max-width="500">
       <v-card>
-        <v-card-title>Tahrirlash</v-card-title>
+        <v-card-title class="headline">
+          <v-icon left color="blue">mdi-account-edit</v-icon>
+          Tahrirlash
+        </v-card-title>
         <v-card-text>
           <v-text-field
             v-model="editForm.name"
             label="Ismi"
+            prepend-icon="mdi-account"
             outlined
           ></v-text-field>
 
-          <!-- Fan Tanlash -->
           <v-autocomplete
             v-model="editForm.subject"
             :items="subjects"
             label="Fan"
+            prepend-icon="mdi-book-open-variant"
             item-text="name"
             item-value="name"
             return-object
             outlined
           ></v-autocomplete>
         </v-card-text>
-        <v-card-actions>
+        <v-card-actions class="modal-actions">
           <v-spacer></v-spacer>
-          <v-card class="btn">
-            <v-btn text @click="closeEditModal">Bekor qilish</v-btn>
-            <v-btn color="primary" @click="saveTeacher">Saqlash</v-btn>
-          </v-card>
+          <v-btn text @click="closeEditModal">
+            <v-icon left>mdi-close</v-icon>
+            Bekor qilish
+          </v-btn>
+          <v-btn color="primary" @click="saveTeacher">
+            <v-icon left>mdi-content-save</v-icon>
+            Saqlash
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
     
-    <!-- Login va Parol Tahrirlash Modal -->
+    <!-- Password Edit Modal -->
     <v-dialog v-model="loginEditModal" max-width="500">
       <v-card>
-        <v-card-title>Login va Parolni Tahrirlash</v-card-title>
+        <v-card-title class="headline">
+          <v-icon left color="red">mdi-lock-reset</v-icon>
+          Login va Parolni Tahrirlash
+        </v-card-title>
         <v-card-text>
           <v-text-field
             v-model="editForm.username"
             label="Login"
+            prepend-icon="mdi-account"
             outlined
             disabled
           ></v-text-field>
 
-          <!-- Parolni ko'rish va yashirish -->
           <v-text-field
             v-model="editForm.password"
             label="Parol"
+            prepend-icon="mdi-lock"
             :type="passwordVisible ? 'text' : 'password'"
             outlined
-            append-icon="mdi-eye"
+            :append-icon="passwordVisible ? 'mdi-eye-off' : 'mdi-eye'"
             @click:append="togglePasswordVisibility"
           ></v-text-field>
         </v-card-text>
-        <v-card-actions class="btn-action">
+        <v-card-actions class="modal-actions">
           <v-spacer></v-spacer>
-          <v-btn text @click="closeLoginEditModal">Bekor qilish</v-btn>
-          <v-btn color="primary" @click="saveLoginDetails">Saqlash</v-btn>
+          <v-btn text @click="closeLoginEditModal">
+            <v-icon left>mdi-close</v-icon>
+            Bekor qilish
+          </v-btn>
+          <v-btn color="primary" @click="saveLoginDetails">
+            <v-icon left>mdi-content-save</v-icon>
+            Saqlash
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -191,13 +222,15 @@ import {
   getDocs,
   updateDoc,
 } from "firebase/firestore";
-import Toastify from "toastify-js"; // Import Toastify
+import Toastify from "toastify-js";
 
 export default {
+  name: "TeacherDashboard",
+  
   data() {
     return {
       teacher: {},
-      isAdmin: false, // Admin bo'lishini aniqlash
+      isAdmin: false,
       editModal: false,
       loginEditModal: false,
       passwordVisible: false,
@@ -207,152 +240,146 @@ export default {
         username: "",
         password: "",
       },
-      subjects: [], // Array to hold subjects
-      totalStudents: 0, // Barcha o'quvchilar soni
-      totalPayments: 0, // Barcha to'lovlar summasi
+      subjects: [],
+      totalStudents: 0,
+      totalPayments: 0,
       totalPass: 0,
-      currentUser: localStorage.getItem("teacherName"), // Get Teacher Name from localStorage
-      // Dashboard statistikasi uchun ma'lumotlar
+      currentUser: localStorage.getItem("teacherName"),
+      // Dashboard statistics data
       statsTotals: {
         revenue: 29960,
-        orders: 125,
-        clients: 102,
-        menus: 60
+        clients: 102
       },
-      // Grafik yo'llari
+      // Chart paths
       revenuePath: "M0,25 L10,20 L20,28 L30,15 L40,20 L50,10 L60,18 L70,5 L80,15 L90,8 L100,15",
-      ordersPath: "M0,15 L10,10 L20,5 L30,15 L40,10 L50,20 L60,15 L70,25 L80,15 L90,5 L100,15",
       clientsPath: "M0,15 L10,5 L20,15 L30,10 L40,20 L50,15 L60,25 L70,15 L80,5 L90,15 L100,20",
-      menusPath: "M0,20 L10,15 L20,10 L30,15 L40,5 L50,15 L60,10 L70,15 L80,25 L90,15 L100,10",
-      // Animatsiya uchun
+      // Animation timeouts
       animationTimeouts: {}
     };
   },
+  
   computed: {
     profileInitial() {
-      return this.currentUser.charAt(0).toUpperCase();
+      return this.teacher.name ? this.teacher.name.charAt(0).toUpperCase() : '';
     },
   },
+  
   methods: {
+    // Fetch teacher data
     async fetchTeacher() {
-      const teacherName = localStorage.getItem("teacherName");
-      if (teacherName) {
+      try {
+        const teacherName = localStorage.getItem("teacherName");
+        if (!teacherName) return;
+        
         this.editForm.name = teacherName;
+        const teacherRef = doc(db, "users", teacherName);
+        const docSnap = await getDoc(teacherRef);
+        
+        if (docSnap.exists()) {
+          this.teacher = docSnap.data();
+          this.editForm.subject = this.teacher.subject;
+          this.editForm.username = this.teacher.username;
+          this.editForm.password = this.teacher.password;
+        }
+        
+        // Fetch subjects
+        await this.fetchSubjects();
+      } catch (error) {
+        this.showToast("Ma'lumotlarni yuklashda xatolik yuz berdi", "error");
+        console.error("Error fetching teacher data:", error);
       }
-      const teacherRef = doc(db, "users", teacherName);
-      const docSnap = await getDoc(teacherRef);
-      if (docSnap.exists()) {
-        this.teacher = docSnap.data();
-        this.editForm.subject = this.teacher.subject;
-        this.editForm.username = this.teacher.username;
-        this.editForm.password = this.teacher.password;
-      }
-      // Fetch subjects from Firestore
-      await this.fetchSubjects();
     },
+    
+    // Fetch subjects
     async fetchSubjects() {
       try {
         const querySnapshot = await getDocs(collection(db, "subjects"));
-        this.subjects = querySnapshot.docs.map((doc) => doc.data().name); // Saqlash faqat `name` stringini
-        console.log("Teachers loaded:", this.subjects);
+        this.subjects = querySnapshot.docs.map(doc => doc.data().name);
       } catch (error) {
-        console.error("Error loading teachers:", error);
+        console.error("Error loading subjects:", error);
       }
     },
 
+    // Modal methods
     openEditModal() {
       this.editModal = true;
     },
+    
     closeEditModal() {
       this.editModal = false;
     },
+    
     async saveTeacher() {
-      const teacherRef = doc(db, "users", this.editForm.name);
       try {
+        const teacherRef = doc(db, "users", this.editForm.name);
         await updateDoc(teacherRef, {
           name: this.editForm.name,
           subject: this.editForm.subject,
         });
+        
         this.teacher.name = this.editForm.name;
         this.teacher.subject = this.editForm.subject;
         this.closeEditModal();
-        // Success notification
-        Toastify({
-          text: "Ma'lumotlar muvaffaqiyatli saqlandi",
-          backgroundColor: "green",
-          duration: 3000,
-          top: 300,
-        }).showToast();
+        
+        this.showToast("Ma'lumotlar muvaffaqiyatli saqlandi", "success");
       } catch (error) {
-        // Error notification
-        Toastify({
-          text: "Ma'lumotlarni saqlashda xatolik yuz berdi",
-          backgroundColor: "red",
-          duration: 3000,
-        }).showToast();
+        this.showToast("Ma'lumotlarni saqlashda xatolik yuz berdi", "error");
+        console.error("Error saving teacher data:", error);
       }
     },
+    
     openLoginEditModal() {
       this.loginEditModal = true;
     },
+    
     closeLoginEditModal() {
       this.loginEditModal = false;
     },
+    
     async saveLoginDetails() {
-      const teacherRef = doc(db, "users", this.editForm.name);
       try {
+        const teacherRef = doc(db, "users", this.editForm.name);
         await updateDoc(teacherRef, {
           username: this.editForm.username,
           password: this.editForm.password,
         });
+        
         this.teacher.username = this.editForm.username;
         this.teacher.password = this.editForm.password;
         this.closeLoginEditModal();
-        // Success notification
-        Toastify({
-          text: "Login va parol muvaffaqiyatli saqlandi",
-          backgroundColor: "green",
-          duration: 3000,
-          top: 300,
-        }).showToast();
+        
+        this.showToast("Login va parol muvaffaqiyatli saqlandi", "success");
       } catch (error) {
-        // Error notification
-        Toastify({
-          text: "Login va parolni saqlashda xatolik yuz berdi",
-          backgroundColor: "red",
-          duration: 3000,
-        }).showToast();
+        this.showToast("Login va parolni saqlashda xatolik yuz berdi", "error");
+        console.error("Error saving login details:", error);
       }
     },
+    
     togglePasswordVisibility() {
       this.passwordVisible = !this.passwordVisible;
     },
     
-    // Animatsiya uchun metodlar
+    // Animation methods
     animateCard(type) {
       const element = this.$refs[`${type}Value`];
-      if (element) {
-        // Animatsiya klassi qo'shish
-        element.classList.add('pulse-animation');
-        
-        // SVG path animatsiyasi
-        const path = document.querySelector(`.${type}-path`);
-        if (path) {
-          path.classList.add('path-animation');
-        }
-        
-        // Animatsiya vaqti tugagandan so'ng klasni olib tashlash
-        this.animationTimeouts[type] = setTimeout(() => {
-          element.classList.remove('pulse-animation');
-          if (path) {
-            path.classList.remove('path-animation');
-          }
-        }, 1000);
+      if (!element) return;
+      
+      element.classList.add('pulse-animation');
+      
+      const path = document.querySelector(`.${type}-path`);
+      if (path) {
+        path.classList.add('path-animation');
       }
+      
+      this.animationTimeouts[type] = setTimeout(() => {
+        element.classList.remove('pulse-animation');
+        if (path) {
+          path.classList.remove('path-animation');
+        }
+      }, 1000);
     },
     
     resetAnimation(type) {
-      // Animatsiyani to'xtatish
       if (this.animationTimeouts[type]) {
         clearTimeout(this.animationTimeouts[type]);
       }
@@ -368,11 +395,24 @@ export default {
       }
     },
     
-    // Raqamlarni formatlash
+    // Format numbers with commas
     formatNumber(number) {
       return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
+    
+    // Toast notification
+    showToast(message, type = "success") {
+      Toastify({
+        text: message,
+        backgroundColor: type === "success" ? "green" : "red",
+        duration: 3000,
+        gravity: "top",
+        position: "center",
+        stopOnFocus: true,
+      }).showToast();
     }
   },
+  
   async created() {
     await this.fetchTeacher();
   },
@@ -380,41 +420,104 @@ export default {
 </script>
 
 <style scoped>
-*{
-  font-family: "Fira Code" !important;
-    font-weight: 400;
+* {
+  font-family: "Fira Code", monospace !important;
+  font-weight: 400;
 }
-/* Custom Styles */
+
+/* Dashboard Header */
+.dashboard-header {
+  padding: 0 12px;
+  margin-bottom: 24px;
+}
+
+.dashboard-title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.dashboard-subtitle {
+  color: #6c757d;
+  font-size: 16px;
+}
+
+/* Profile Card */
+.profile-card {
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
 .avatar-main {
   margin: 0 auto;
   display: flex;
 }
 
-/* Dashboard Styles */
-.dashboard-header {
-  padding: 0 12px;
-  margin-bottom: 16px;
+.profile-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
-.dashboard-title {
-  font-size: 24px;
+.profile-initial {
+  height: 150px;
+  width: 150px;
+  font-size: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-info {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.profile-name {
+  font-size: 22px;
   font-weight: 600;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 
-.dashboard-subtitle {
-  color: #6c757d;
-  font-size: 14px;
+.profile-username {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.profile-subject {
+  font-size: 18px;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
 }
 
 /* Stats Cards */
 .stats-card {
   display: flex;
-  padding: 16px;
-  border-radius: 12px;
+  padding: 20px;
+  border-radius: 16px;
   position: relative;
   transition: all 0.3s ease;
   overflow: hidden;
+  height: 100%;
 }
 
 .stats-card:hover {
@@ -426,13 +529,11 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 50px;
+  height: 50px;
   border-radius: 12px;
   margin-right: 16px;
 }
-
-
 
 .stats-content {
   display: flex;
@@ -441,25 +542,26 @@ export default {
 }
 
 .stats-title {
-  font-size: 14px;
+  font-size: 16px;
   color: #6c757d;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 
 .stats-value {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 600;
   margin-bottom: 8px;
 }
 
 .currency {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: normal;
 }
 
 .stats-chart {
   position: relative;
   height: 30px;
+  margin-top: auto;
 }
 
 .chart {
@@ -469,7 +571,7 @@ export default {
 
 .chart-path {
   fill: none;
-  stroke-width: 2;
+  stroke-width: 2.5;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -477,12 +579,56 @@ export default {
 .revenue-path {
   stroke: #2196f3;
 }
-  .clients-path {
-    stroke: #2196f3;
 
-  }
+.clients-path {
+  stroke: #3f51b5;
+}
 
-/* Animatsiyalar */
+/* Admin Cards */
+.admin-stats-card {
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  padding: 8px;
+}
+
+.admin-stats-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.admin-stats-card .v-card__title {
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.admin-stat-value {
+  font-size: 28px !important;
+  font-weight: 700;
+  color: #333;
+  padding-top: 8px;
+}
+
+/* Action Buttons */
+.action-button {
+  padding: 8px 16px;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.action-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Modal Styles */
+.modal-actions {
+  padding: 16px;
+}
+
+/* Animations */
 .pulse-animation {
   animation: pulse 1s;
 }
@@ -500,7 +646,7 @@ export default {
 }
 
 .path-animation {
-  animation: dashoffset 1s ease-in-out;
+  animation: dashoffset 1.2s ease-in-out;
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
 }
@@ -511,58 +657,27 @@ export default {
   }
 }
 
-/* Admin Stats Kartlari */
-.admin-stats-card {
-  transition: all 0.3s ease;
-  border-radius: 12px;
-}
-
-.admin-stats-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
-}
-
-.admin-stats-card .v-card__title {
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.admin-stats-card .v-card__subtitle {
-  font-size: 24px;
-  font-weight: 700;
-}
-
-/* Tahrirlash tugmalari */
-.action-button {
-  transition: all 0.3s ease;
-  transform-origin: center;
-}
-
-.action-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
 /* Responsive Styles */
-@media (max-width: 390px) {
-  .btn {
-    flex-direction: column;
-    margin-top: 50px !important;
-    flex-wrap: wrap !important;
-  }
-  .main-blog {
-    flex-direction: column;
-    margin: 0 auto;
-    text-align: center;
-  }
-  .all-btn {
+@media (max-width: 600px) {
+  .action-buttons {
     flex-direction: column;
   }
+  
+  .action-button {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+  
   .stats-card {
     margin-bottom: 16px;
   }
+  
   .stats-value {
     font-size: 20px;
+  }
+  
+  .profile-header {
+    flex-direction: column;
   }
 }
 </style>

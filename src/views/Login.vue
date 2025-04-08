@@ -119,11 +119,11 @@ export default {
         
         // Admin roli bo'lsa, admin paneliga yo'naltirish
         if (role === "admin") {
-          this.$router.push("/admin-dashboard/home");
+          this.$router.push("/admin/home");
         }
         // O'qituvchi roli bo'lsa, o'qituvchi paneliga yo'naltirish
         else if (role === "teacher") {
-          this.$router.push("/main/home");
+          this.$router.push("/home");
         } else {
           this.error = "Foydalanuvchi roli noto'g'ri!";
         }
