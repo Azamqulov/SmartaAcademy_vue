@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid  >
+  <v-container fluid>
     <!-- Dashboard Header with Blue Background -->
     <v-sheet
       class="header-banner mb-6 pa-6 d-flex flex-column justify-center"
@@ -9,8 +9,12 @@
     >
       <div class="d-flex flex-column flex-md-row justify-space-between align-center">
         <div class="header-content">
-          <h1 class="text-h3 font-weight-bold white--text mb-2">O'quvchilar ma'lumotlari</h1>
-          <p class="text-subtitle-1 white--text">Ta'lim markazidagi o'quvchilar ro'yxati</p>
+          <h1 class="text-h3 font-weight-bold white--text mb-2">
+            O'quvchilar ma'lumotlari
+          </h1>
+          <p class="text-subtitle-1 white--text">
+            Ta'lim markazidagi o'quvchilar ro'yxati
+          </p>
         </div>
         <div class="d-flex flex-column flex-md-row mt-4 mt-md-0">
           <v-btn
@@ -73,9 +77,11 @@
       <v-card-title class="subtitle-1 font-weight-bold">
         <v-icon left color="blue">mdi-account-group</v-icon>
         O'quvchilar ro'yxati
-        <v-chip class="ml-2" color="blue" small outlined>{{ filteredStudents.length }} ta</v-chip>
+        <v-chip class="ml-2" color="blue" small outlined
+          >{{ filteredStudents.length }} ta</v-chip
+        >
       </v-card-title>
-      
+
       <v-data-table
         :headers="headers"
         :items="filteredStudents"
@@ -92,7 +98,7 @@
             {{ index + 1 }}
           </v-chip>
         </template>
-        
+
         <!-- Name column with first letter capitalized -->
         <template v-slot:item.name="{ item }">
           <span class="font-weight-medium">{{ item.name }}</span>
@@ -139,7 +145,7 @@
               </template>
               <span>Tahrirlash</span>
             </v-tooltip>
-            
+
             <v-tooltip bottom>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
@@ -161,7 +167,9 @@
         <!-- Empty state -->
         <template v-slot:no-data>
           <div class="pa-6 text-center">
-            <h3 class="text-subtitle-1 font-weight-medium grey--text">O'quvchilar topilmadi</h3>
+            <h3 class="text-subtitle-1 font-weight-medium grey--text">
+              O'quvchilar topilmadi
+            </h3>
             <v-btn color="primary" class="mt-3" @click="openAddModal">
               O'quvchi qo'shish
             </v-btn>
@@ -177,7 +185,7 @@
           <v-icon left color="white">mdi-account-plus</v-icon>
           Yangi o'quvchi qo'shish
         </v-card-title>
-        
+
         <v-card-text class="pt-6">
           <v-form ref="addForm">
             <v-row>
@@ -191,7 +199,7 @@
                   :rules="[(v) => v?.length >= 3 || 'Kamida 3 ta belgi bo\'lishi kerak']"
                 ></v-text-field>
               </v-col>
-              
+
               <v-col cols="12" sm="6">
                 <v-text-field
                   v-model="newStudent.surname"
@@ -202,7 +210,7 @@
                   :rules="[(v) => v?.length >= 3 || 'Kamida 3 ta belgi bo\'lishi kerak']"
                 ></v-text-field>
               </v-col>
-              
+
               <v-col cols="12" sm="6">
                 <v-text-field
                   v-model="newStudent.phone"
@@ -214,7 +222,7 @@
                   :rules="[(v) => v?.length >= 9 || 'To\'g\'ri kiriting telefon raqamni']"
                 ></v-text-field>
               </v-col>
-              
+
               <v-col cols="12" sm="6">
                 <v-text-field
                   v-model="newStudent.payment"
@@ -226,7 +234,7 @@
                   color="primary"
                 ></v-text-field>
               </v-col>
-              
+
               <v-col cols="12" sm="6">
                 <v-select
                   v-model="newStudent.subject"
@@ -238,7 +246,7 @@
                   :rules="[(v) => !!v || 'Fan tanlanmadi']"
                 ></v-select>
               </v-col>
-              
+
               <v-col cols="12" sm="6">
                 <v-select
                   v-model="newStudent.teacher"
@@ -250,7 +258,7 @@
                   :rules="[(v) => !!v || 'O\'qtuvchi tanlanmadi']"
                 ></v-select>
               </v-col>
-              
+
               <v-col cols="12">
                 <v-menu
                   ref="dateMenu"
@@ -282,16 +290,12 @@
             </v-row>
           </v-form>
         </v-card-text>
-        
+
         <v-divider></v-divider>
-        
+
         <v-card-actions class="pa-4">
           <v-spacer></v-spacer>
-          <v-btn
-            text
-            color="grey darken-1"
-            @click="addModal = false"
-          >
+          <v-btn text color="grey darken-1" @click="addModal = false">
             Bekor qilish
           </v-btn>
           <v-btn
@@ -313,7 +317,7 @@
           <v-icon left color="white">mdi-account-edit</v-icon>
           O'quvchi ma'lumotlarini tahrirlash
         </v-card-title>
-        
+
         <v-card-text class="pt-6">
           <v-form ref="editForm">
             <v-row>
@@ -327,7 +331,7 @@
                   :rules="[(v) => v?.length >= 3 || 'Kamida 3 ta belgi bo\'lishi kerak']"
                 ></v-text-field>
               </v-col>
-              
+
               <v-col cols="12" sm="6">
                 <v-text-field
                   v-model="editedStudent.surname"
@@ -338,7 +342,7 @@
                   :rules="[(v) => v?.length >= 3 || 'Kamida 3 ta belgi bo\'lishi kerak']"
                 ></v-text-field>
               </v-col>
-              
+
               <v-col cols="12" sm="6">
                 <v-text-field
                   v-model="editedStudent.phone"
@@ -350,7 +354,7 @@
                   :rules="[(v) => v?.length >= 9 || 'To\'g\'ri kiriting telefon raqamni']"
                 ></v-text-field>
               </v-col>
-              
+
               <v-col cols="12" sm="6">
                 <v-text-field
                   v-model="editedStudent.payment"
@@ -362,7 +366,7 @@
                   color="primary"
                 ></v-text-field>
               </v-col>
-              
+
               <v-col cols="12" sm="6">
                 <v-select
                   v-model="editedStudent.subject"
@@ -373,7 +377,7 @@
                   color="primary"
                 ></v-select>
               </v-col>
-              
+
               <v-col cols="12" sm="6">
                 <v-select
                   v-model="editedStudent.teacher"
@@ -384,7 +388,7 @@
                   color="primary"
                 ></v-select>
               </v-col>
-              
+
               <v-col cols="12">
                 <v-menu
                   ref="editDateMenu"
@@ -415,22 +419,15 @@
             </v-row>
           </v-form>
         </v-card-text>
-        
+
         <v-divider></v-divider>
-        
+
         <v-card-actions class="pa-4">
           <v-spacer></v-spacer>
-          <v-btn
-            text
-            color="grey darken-1"
-            @click="editModal = false"
-          >
+          <v-btn text color="grey darken-1" @click="editModal = false">
             Bekor qilish
           </v-btn>
-          <v-btn
-            color="primary"
-            @click="updateStudent"
-          >
+          <v-btn color="primary" @click="updateStudent">
             <v-icon left>mdi-content-save</v-icon>
             Saqlash
           </v-btn>
@@ -445,29 +442,26 @@
           <v-icon left color="white">mdi-alert</v-icon>
           O'quvchini o'chirish
         </v-card-title>
-        
+
         <v-card-text class="pt-4 text-center">
           <v-icon color="blue" size="64" class="mb-4">mdi-delete-forever</v-icon>
-          <h3 class="text-h6 mb-2">{{ studentToDelete ? studentToDelete.name + ' ' + studentToDelete.surname : '' }}</h3>
+          <h3 class="text-h6 mb-2">
+            {{
+              studentToDelete ? studentToDelete.name + " " + studentToDelete.surname : ""
+            }}
+          </h3>
           <p class="text-body-1">Bu o'quvchi ma'lumotlarini o'chirishni istaysizmi?</p>
           <p class="text-caption primary--text mt-2">Bu amalni qaytarib bo'lmaydi!</p>
         </v-card-text>
-        
+
         <v-divider></v-divider>
-        
+
         <v-card-actions class="pa-4">
           <v-spacer></v-spacer>
-          <v-btn
-            text
-            color="grey darken-1"
-            @click="deleteDialog = false"
-          >
+          <v-btn text color="grey darken-1" @click="deleteDialog = false">
             Bekor qilish
           </v-btn>
-          <v-btn
-            color="primary"
-            @click="confirmDeleteStudent"
-          >
+          <v-btn color="primary" @click="confirmDeleteStudent">
             <v-icon left>mdi-delete</v-icon>
             O'chirish
           </v-btn>
@@ -543,30 +537,31 @@ export default {
     },
     filteredStudents() {
       let filtered = this.students;
-      
+
       // Filter by search term
       if (this.search) {
         const searchLower = this.search.toLowerCase();
-        filtered = filtered.filter(student => 
-          student.name.toLowerCase().includes(searchLower) || 
-          student.surname.toLowerCase().includes(searchLower)
+        filtered = filtered.filter(
+          (student) =>
+            student.name.toLowerCase().includes(searchLower) ||
+            student.surname.toLowerCase().includes(searchLower)
         );
       }
-      
+
       // Filter by subject
       if (this.selectedSubject) {
-        filtered = filtered.filter(student => student.subject === this.selectedSubject);
+        filtered = filtered.filter((student) => student.subject === this.selectedSubject);
       }
-      
+
       // Filter by teacher if not admin
       if (!this.isAdmin) {
-        filtered = filtered.filter(student => 
-          student.teacher && student.teacher.name === this.currentUser
+        filtered = filtered.filter(
+          (student) => student.teacher && student.teacher.name === this.currentUser
         );
       }
-      
+
       return filtered;
-    }
+    },
   },
   async created() {
     // Fetch current teacher's name and students on creation
@@ -582,15 +577,21 @@ export default {
   methods: {
     // Get initials from name
     getInitials(name) {
-      return name ? name.split(' ').map(n => n[0]).join('').toUpperCase() : '?';
+      return name
+        ? name
+            .split(" ")
+            .map((n) => n[0])
+            .join("")
+            .toUpperCase()
+        : "?";
     },
-    
+
     // Format currency with thousand separators
     formatCurrency(value) {
-      if (!value) return '0';
+      if (!value) return "0";
       return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " so'm";
     },
-    
+
     // Fetch students data from Firebase
     async loadStudents() {
       try {
@@ -604,7 +605,7 @@ export default {
         this.showNotification("O'quvchilar ma'lumotlarini yuklashda xatolik", "error");
       }
     },
-    
+
     // Fetch subjects data from Firebase
     async loadSubjects() {
       try {
@@ -614,7 +615,7 @@ export default {
         console.error("Error loading subjects:", error);
       }
     },
-    
+
     // Fetch teachers data from Firebase
     async loadTeachers() {
       try {
@@ -624,7 +625,7 @@ export default {
         console.error("Error loading teachers:", error);
       }
     },
-    
+
     // Open Add Student Modal
     openAddModal() {
       this.newStudent = {
@@ -638,7 +639,7 @@ export default {
       };
       this.addModal = true;
     },
-    
+
     // Add new student to Firebase
     async addStudent() {
       try {
@@ -671,29 +672,29 @@ export default {
         this.showNotification("O'quvchi qo'shishda xatolik yuz berdi", "error");
       }
     },
-    
+
     // Confirm delete student
     confirmDelete(student) {
       this.studentToDelete = student;
       this.deleteDialog = true;
     },
-    
+
     // Delete confirmed student
     async confirmDeleteStudent() {
       if (!this.studentToDelete) return;
-      
+
       try {
         await deleteDoc(doc(db, "students", this.studentToDelete.id));
 
         // Remove student from local array
-        const index = this.students.findIndex(s => s.id === this.studentToDelete.id);
+        const index = this.students.findIndex((s) => s.id === this.studentToDelete.id);
         if (index > -1) {
           this.students.splice(index, 1);
         }
 
         // Show success notification
         this.showNotification("O'quvchi muvaffaqiyatli o'chirildi", "info");
-        
+
         // Close dialog
         this.deleteDialog = false;
         this.studentToDelete = null;
@@ -702,21 +703,21 @@ export default {
         this.showNotification("O'quvchi o'chirishda xatolik yuz berdi", "error");
       }
     },
-    
+
     // Open Edit Student Modal
     editStudent(student) {
-      this.editedStudent = { 
+      this.editedStudent = {
         ...student,
-        teacher: student.teacher ? student.teacher.name : '',
+        teacher: student.teacher ? student.teacher.name : "",
       };
       this.editModal = true;
     },
-    
+
     // Update student details in Firebase
     async updateStudent() {
       try {
         const studentRef = doc(db, "students", this.editedStudent.id);
-        
+
         // Prepare update object
         const updateData = {
           name: this.editedStudent.name,
@@ -727,21 +728,24 @@ export default {
           payment: this.editedStudent.payment,
           date: this.editedStudent.date,
         };
-        
+
         // Update in Firebase
         await updateDoc(studentRef, updateData);
 
         // Update student in local array
-        const index = this.students.findIndex(s => s.id === this.editedStudent.id);
+        const index = this.students.findIndex((s) => s.id === this.editedStudent.id);
         if (index !== -1) {
-          this.students[index] = { 
+          this.students[index] = {
             ...this.editedStudent,
-            teacher: { name: this.editedStudent.teacher }
+            teacher: { name: this.editedStudent.teacher },
           };
         }
 
         // Show success notification
-        this.showNotification("O'quvchi ma'lumotlari muvaffaqiyatli yangilandi", "success");
+        this.showNotification(
+          "O'quvchi ma'lumotlari muvaffaqiyatli yangilandi",
+          "success"
+        );
 
         // Close modal
         this.editModal = false;
@@ -750,43 +754,43 @@ export default {
         this.showNotification("O'quvchi ma'lumotlarini yangilashda xatolik", "error");
       }
     },
-    
+
     // Export student data to Excel
     exportToExcel() {
       try {
         // Prepare data for export - remove complex objects and ID
         const exportData = this.filteredStudents.map((student, index) => ({
-          '№': index + 1,
-          'Ism': student.name,
-          'Familya': student.surname,
-          'Fan': student.subject,
-          'O\'qituvchi': student.teacher ? student.teacher.name : '',
-          'Sana': student.date,
-          'Telefon': student.phone,
-          'To\'lov': student.payment
+          "№": index + 1,
+          Ism: student.name,
+          Familya: student.surname,
+          Fan: student.subject,
+          "O'qituvchi": student.teacher ? student.teacher.name : "",
+          Sana: student.date,
+          Telefon: student.phone,
+          "To'lov": student.payment,
         }));
-        
+
         const ws = XLSX.utils.json_to_sheet(exportData);
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, "O'quvchilar");
         XLSX.writeFile(wb, "o'quvchilar_ro'yxati.xlsx");
-        
+
         this.showNotification("Excel fayli muvaffaqiyatli yuklandi", "success");
       } catch (error) {
         console.error("Error exporting to Excel:", error);
         this.showNotification("Excel faylini yuklashda xatolik", "error");
       }
     },
-    
+
     // Simple notification using alert (fallback if Toastify is not available)
     showNotification(message, type = "success") {
-      if (typeof Toastify === 'function') {
+      if (typeof Toastify === "function") {
         const bgColors = {
           success: "linear-gradient(to right, #4CAF50, #2196F3)",
           error: "linear-gradient(to right, #f44336, #e91e63)",
-          info: "linear-gradient(to right, #2196F3, #03A9F4)"
+          info: "linear-gradient(to right, #2196F3, #03A9F4)",
         };
-        
+
         Toastify({
           text: message,
           duration: 3000,
@@ -800,7 +804,7 @@ export default {
         // Fallback to console if Toastify is not available
         console.log(`${type.toUpperCase()}: ${message}`);
       }
-    }
+    },
   },
   async mounted() {
     await this.loadStudents();
@@ -812,7 +816,7 @@ export default {
 
 <style scoped>
 .v-container.fluid {
-    max-width: 95% !important;
+  max-width: 95% !important;
 }
 .student-dashboard {
   margin: 20px;
@@ -840,7 +844,7 @@ export default {
     height: auto !important;
     padding: 1.5rem !important;
   }
-  
+
   .text-h3 {
     font-size: 1.5rem !important;
   }

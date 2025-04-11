@@ -28,7 +28,7 @@
             </label>
             <v-text-field
               v-model="username"
-              placeholder="Enter your email"
+              placeholder="Enter your username"
               variant="outlined"
               class="login-input"
               hide-details

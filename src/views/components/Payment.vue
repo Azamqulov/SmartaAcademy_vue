@@ -585,9 +585,6 @@ export default {
   color: #757575;
 }
 
-.total-row {
-  background-color: #f5f5f5;
-}
 
 .stat-card {
   transition: transform 0.2s;
@@ -603,10 +600,6 @@ export default {
 
 .payment-cell {
   padding: 0 2px !important;
-}
-
-.stat-summary {
-  background-color: #f8f9fa;
 }
 
 .stat-chip {
