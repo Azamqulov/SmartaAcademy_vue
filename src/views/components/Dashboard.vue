@@ -160,7 +160,7 @@
                   <div class="d-flex justify-space-between align-center mb-3">
                     <h3 class="chart-title mb-0">
                       <v-icon color="blue" small class="mr-1">mdi-calendar-clock</v-icon>
-                      Bugungi Dars Jadvali
+                       Dars Jadvali
                     </h3>
                     <v-btn color="success" small @click="openNewLessonModal">
                       <v-icon left small>mdi-plus</v-icon> Qo'shish
@@ -175,10 +175,7 @@
                       <div class="timeline-content">
                         <div class="timeline-title">{{ lesson.title }}</div>
                         <div class="timeline-group">{{ lesson.group }}</div>
-                        <v-chip x-small :color="getLessonStatusColor(lesson.status)" text-color="white"
-                          class="timeline-status">
-                          {{ lesson.status }}
-                        </v-chip>
+                     
                       </div>
                       <div class="timeline-actions">
                         <v-btn icon x-small @click="editLesson(index)">
@@ -215,9 +212,11 @@
                     <v-div dense>
                       <v-list-item v-for="(plan, index) in weekPlan" :key="index" class="week-plan-item">
                         <v-list-item-icon>
-                          <v-icon :color="plan.color">{{ plan.icon }}</v-icon>
+                          <v-icon color="blue">{{ plan.icon }}</v-icon>
                         </v-list-item-icon>
-                        <v-list-item-content>
+                        <v-row justify="space-between" align="center" class="plan-content" >
+                       
+                        <v-list-item-content >
                           <v-list-item-title>{{ plan.title }}</v-list-item-title>
                           <v-list-item-subtitle>{{ plan.date }} • {{ plan.time }}</v-list-item-subtitle>
                         </v-list-item-content>
@@ -229,6 +228,7 @@
                             <v-icon color="red lighten-1" small>mdi-delete</v-icon>
                           </v-btn>
                         </v-list-item-action>
+                      </v-row>
                       </v-list-item>
                       <div v-if="weekPlan.length === 0" class="empty-state">
                         <p class="text-center grey--text ">Kelasi hafta uchun rejalar yo'q</p>
@@ -260,8 +260,6 @@
           <v-text-field v-model="lessonForm.time" label="Vaqt (09:00 - 10:30)" prepend-icon="mdi-clock-outline" outlined
             required></v-text-field>
 
-          <v-select v-model="lessonForm.status" :items="lessonStatuses" label="Holati" prepend-icon="mdi-flag" outlined
-            required></v-select>
         </v-card-text>
         <v-card-actions class="modal-actions">
           <v-spacer></v-spacer>
@@ -298,22 +296,6 @@
 
           <v-text-field v-model="planForm.time" label="Vaqt " prepend-icon="mdi-clock-outline" outlined
             required></v-text-field>
-
-          <v-select v-model="planForm.icon" :items="iconOptions" label="Belgi" item-text="name" item-value="value"
-            prepend-icon="mdi-shape" outlined>
-            <template v-slot:item="{ item }">
-              <v-icon :color="item.color" class="mr-2">{{ item.value }}</v-icon>
-              {{ item.name }}
-            </template>
-          </v-select>
-
-          <v-select v-model="planForm.color" :items="colorOptions" label="Rang" item-text="name" item-value="value"
-            prepend-icon="mdi-palette" outlined>
-            <template v-slot:item="{ item }">
-              <v-icon :color="item.value" class="mr-2">mdi-circle</v-icon>
-              {{ item.name }}
-            </template>
-          </v-select>
         </v-card-text>
         <v-card-actions class="modal-actions">
           <v-spacer></v-spacer>
@@ -965,7 +947,10 @@ export default {
 <style scoped>
 /* Enhanced Dashboard Styles with Modern Design */
 
-
+.plan-content{
+  height: 12vh;
+  padding: 15px;
+}
 .dashboard-header {
   margin-bottom: 32px;
   text-align: center;
