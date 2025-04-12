@@ -41,7 +41,7 @@
         style="position: absolute; bottom: 16px; width: calc(100% - 24px); margin: 0 12px"
         elevation="2"
       >
-        <v-icon left>mdi-logout</v-icon>
+        <v-icon left color="white">mdi-logout</v-icon>
         Logout
       </v-btn>
       <v-btn

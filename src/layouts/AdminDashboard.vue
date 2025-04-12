@@ -38,7 +38,7 @@
         class="w-full bg-red-700 mx-3"
         style="position: absolute; bottom: 10px; background: red; width: 90%"
       >
-        <v-icon>mdi-logout</v-icon>
+        <v-icon color="white">mdi-logout</v-icon>
       </v-btn>
       <v-btn
         icon
@@ -114,7 +114,7 @@ export default {
         // { title: "Dasboard", icon: "mdi-view", link: "/admin/dashboard" },
         {
           title: "Dasboard",
-          icon: "mdi-view",
+          icon: "mdi-widgets",
           link: "/admin/admin",
         },
       ],

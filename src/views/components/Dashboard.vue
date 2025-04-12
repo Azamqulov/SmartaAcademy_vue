@@ -221,7 +221,7 @@
                           <v-list-item-subtitle>{{ plan.date }} • {{ plan.time }}</v-list-item-subtitle>
                         </v-list-item-content>
                         <v-list-item-action>
-                          <v-btn icon small @click="editPlan(index)">
+                          <v-btn icon small @click="editPlan(index)" class="mr-2">
                             <v-icon color="grey lighten-1" small>mdi-pencil</v-icon>
                           </v-btn>
                           <v-btn icon small @click="confirmDeletePlan(index)">

@@ -145,10 +145,9 @@
       <v-dialog v-model="editModalLocal" max-width="600px" persistent>
         <v-card class="rounded-lg modal-card">
           <div class="modal-pattern"></div>
-          <v-card-title class="primary white--text modal-header">
-            <v-icon left color="white">mdi-account-edit</v-icon>
-            O'quvchi ma'lumotlarini tahrirlash
-            <v-spacer></v-spacer>
+          <v-card-title class="primary white--text modal-header d-flex align-center justify-space-between">
+            <v-icon left color="blue">mdi-account-edit</v-icon>
+            <p class="font-weight-bold">O'quvchi ma'lumotlarini tahrirlash</p>
             <v-btn icon small @click="closeEditModal" class="white--text">
               <v-icon>mdi-close</v-icon>
             </v-btn>
