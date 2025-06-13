@@ -1,5 +1,5 @@
 <template>
-  <v-app :class="themeClass" style="height: 100vh">
+  <v-app class="" style="height: 100vh">
     <!-- Sidebar -->
     <v-navigation-drawer app v-model="sidebarVisible" class="sidebar-drawer">
       <v-list>
@@ -51,7 +51,9 @@
         :class="{ 'rotate-icon': !sidebarVisible }"
         elevation="2"
       >
-        <v-icon>{{ sidebarVisible ? "mdi-chevron-left" : "mdi-chevron-right" }}</v-icon>
+        <v-icon 
+        color="primary"
+        >{{ sidebarVisible ? "mdi-chevron-left" : "mdi-chevron-right" }}</v-icon>
       </v-btn>
     </v-navigation-drawer>
 
