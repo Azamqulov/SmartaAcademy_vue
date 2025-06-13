@@ -41,17 +41,8 @@
     <!-- Search bar - Redesigned -->
     <v-card class="search-card mb-6" elevation="0">
       <v-card-text>
-        <v-text-field
-          v-model="search"
-          label="Search by Name"
-          clearable
-          outlined
-          dense
-          hide-details
-          prepend-inner-icon="mdi-magnify"
-          background-color="white"
-          class="search-field"
-        />
+        <v-text-field v-model="search" label="Search by Name" clearable outlined dense hide-details
+          prepend-inner-icon="mdi-magnify" background-color="white" class="search-field" />
       </v-card-text>
     </v-card>
 
@@ -68,18 +59,10 @@
         </v-row>
       </v-card-title>
 
-      <v-data-table
-        :headers="headers"
-        :items="filteredStudents"
-        :items-per-page="10"
-        class="elevation-0"
-        :footer-props="{
-          'items-per-page-options': [5, 10, 15, 20],
-          'items-per-page-text': 'Rows per page:',
-        }"
-        :loading="loading"
-        loading-text="O'quvchilar yuklanyapti..."
-      >
+      <v-data-table :headers="headers" :items="filteredStudents" :items-per-page="10" class="elevation-0" :footer-props="{
+        'items-per-page-options': [5, 10, 15, 20],
+        'items-per-page-text': 'Rows per page:',
+      }" :loading="loading" loading-text="O'quvchilar yuklanyapti...">
         <!-- Fixed: Removed custom header slot that was causing issues -->
 
         <!-- Custom styling for status/subject column -->
@@ -461,14 +444,17 @@ export default {
   font-weight: 500;
   text-transform: uppercase;
 }
-.dark.stat-value{
+
+.dark.stat-value {
   color: #ffffff;
 }
+
 .stat-value {
   font-size: 1.75rem;
   font-weight: 700;
   color: #37474f;
 }
+
 /* Table styling */
 .table-card {
   border-radius: 5px;

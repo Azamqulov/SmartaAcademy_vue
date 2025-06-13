@@ -282,10 +282,10 @@
       <!-- Delete Confirmation Dialog -->
       <v-dialog v-model="deleteDialogLocal" max-width="420px">
         <v-card class="rounded-lg">
-          <v-card-title class="error white--text">
-            <v-icon left color="white">mdi-alert</v-icon>
-            O'quvchini o'chirish
-            <v-spacer></v-spacer>
+          <v-card-title class="error white--text d-flex align-center justify-space-between">
+            <v-icon left color="red">mdi-alert</v-icon>
+          <p>  O'quvchini o'chirish
+            <v-spacer></v-spacer></p>
             <v-btn icon small @click="closeDeleteModal" class="white--text">
               <v-icon>mdi-close</v-icon>
             </v-btn>
