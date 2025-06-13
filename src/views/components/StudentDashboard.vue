@@ -143,11 +143,7 @@
         <!-- Name column -->
         <template v-slot:item.name="{ item }">
           <div class="d-flex align-center">
-            <v-avatar size="32" color="blue lighten-4" class="mr-2">
-              <span class="blue--text font-weight-bold">{{
-                getInitials(item.name)
-              }}</span>
-            </v-avatar>
+           
             <span class="font-weight-medium">{{ item.name }}</span>
           </div>
         </template>
@@ -285,6 +281,8 @@ import {
 } from "firebase/firestore";
 import * as XLSX from "xlsx";
 import StudentModal from "./StudentModal.vue";
+import Toastify from "toastify-js";
+
 
 export default {
   components: {

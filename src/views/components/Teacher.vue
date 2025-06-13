@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+    <v-container >
     <v-card class="teacher-management-card" elevation="3">
       <!-- Header Section -->
       <v-card-title class="header-section px-4 py-3">

@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <!-- Dashboard Header with Blue Background -->
-    <v-sheet class="header-banner mb-6 pa-6 d-flex flex-column justify-center" color="blue" elevation="2" height="160">
+    <v-sheet class="header-banner mb-6 pa-6 d-flex flex-column justify-center " color="blue" elevation="2" height="160">
       <div class="d-flex flex-column flex-md-row justify-space-between align-center">
         <div class="header-content">
           <h1 class="text-h3 font-weight-bold white--text mb-2">

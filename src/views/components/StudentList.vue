@@ -1,7 +1,7 @@
 <template>
     <div>
       <!-- Search and Filter Panel -->
-      <v-card class="mb-6 rounded-lg search-card" elevation="2">
+      <v-card class="mb-6 rounded-lg search-card " elevation="2">
         <v-card-text>
           <v-row align="center">
             <v-col cols="12" md="6">

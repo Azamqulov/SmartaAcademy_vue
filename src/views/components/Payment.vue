@@ -1,8 +1,8 @@
 <template>
-  <v-container fluid>
+  <v-container >
     <v-row>
       <v-col cols="12">
-        <v-card class="table-card rounded-lg overflow-hidden elevation-3">
+        <v-card class="table-card rounded-lg overflow-hidden elevation-3 mt-10">
           <v-card-title class="primary white--text py-3">
             <v-icon large color="blue" class="mr-2">mdi-cash-register</v-icon>
             <span class="text-h5 font-weight-bold">O'quvchilar To'lov Jadvali</span>

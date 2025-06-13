@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container >
     <!-- Dashboard Header -->
     <v-row class="mt-6">
       <v-col cols="12">

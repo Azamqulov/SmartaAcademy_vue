@@ -1,9 +1,9 @@
 <template>
-  <v-container fluid class="dashboard-container">
+  <v-container  class="dashboard-container">
     <!-- Admin Dashboard Stats Cards -->
     <v-row class="mb-6">
       <v-col cols="12">
-        <h1 class="text-h4 font-weight-bold mb-4">Admin Dashboard</h1>
+        <h1 class="text-h4 font-weight-bold mb-4 mt-10">Admin Dashboard</h1>
       </v-col>
       <v-col v-for="(stat, index) in statsCards" :key="index" cols="12" sm="6" md="4">
         <v-card 
